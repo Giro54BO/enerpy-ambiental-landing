@@ -22,7 +22,7 @@ Then open `http://localhost:4173`. No build step, no dependencies — deploy by 
 | `styles.css` | Design tokens and all styling. No framework |
 | `main.js` | Nav drawer, process stepper, scroll reveal. ~130 lines, no dependencies |
 | `img/` | Web-ready images, renamed and re-encoded from `Assets/Img/` |
-| `Assets/`, `Context/` | Untouched source material |
+| `Assets/`, `Context/` | Local source material — excluded from this repo, see below |
 
 ## Palette
 
