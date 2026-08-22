@@ -1,5 +1,7 @@
 # Enerpy Ambiental — landing page
 
+**Live demo:** https://giro54bo.github.io/enerpy-ambiental-landing/
+
 Static demo landing built from `Context/Web Express - Brief para diseño.pdf` (brief 07,
 17 Aug 2026, Valeria Pardo), structured after the Upmind reference and styled after Wise.
 
@@ -81,8 +83,20 @@ note #7.
 - JSON-LD: `Organization`, `WebSite`, `Service`, and `FAQPage` mirroring all 5 rendered Q&As
 - FAQ answers written as declarative single sentences so AI assistants can extract them
 
-Absolute URLs in the meta tags and JSON-LD assume `https://enerpyambiental.com.py/`.
-Update them if the demo is hosted elsewhere.
+Absolute URLs currently point at the GitHub Pages demo, and the page carries
+`<meta name="robots" content="noindex, nofollow">` so this preview cannot compete with
+the client's live domain in search results.
+
+**Before production:** remove the robots tag and swap `canonical`, `og:url`, `og:image`,
+`twitter:image`, the `WebSite` node's `url`, and the `Organization` `logo` back to
+`https://enerpyambiental.com.py/`. The `mailto:` links, the `Organization` `url`, and the
+`#org` identifiers already point at the real domain and should be left alone.
+
+## What is not in this repository
+
+`Context/` (the agency brief, client brochures, the RMO technical sheet, an audio
+recording) and `Assets/` (original source images) are excluded via `.gitignore` — this is
+a public repository and that material is internal. The web-ready images live in `img/`.
 
 ## Accessibility
 
