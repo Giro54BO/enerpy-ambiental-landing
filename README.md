@@ -1,0 +1,99 @@
+# Enerpy Ambiental — landing page
+
+Static demo landing built from `Context/Web Express - Brief para diseño.pdf` (brief 07,
+17 Aug 2026, Valeria Pardo), structured after the Upmind reference and styled after Wise.
+
+## Run it
+
+```bash
+python3 -m http.server 4173
+```
+
+Then open `http://localhost:4173`. No build step, no dependencies — deploy by uploading
+`index.html`, `styles.css`, `main.js` and `img/` to any static host.
+
+## Files
+
+| Path | What it is |
+|---|---|
+| `index.html` | The whole page: 12 sections + nav + footer, plus meta and JSON-LD |
+| `styles.css` | Design tokens and all styling. No framework |
+| `main.js` | Nav drawer, process stepper, scroll reveal. ~130 lines, no dependencies |
+| `img/` | Web-ready images, renamed and re-encoded from `Assets/Img/` |
+| `Assets/`, `Context/` | Untouched source material |
+
+## Palette
+
+The palette image you supplied, as tokens in `styles.css`:
+
+| Token | Hex | Role |
+|---|---|---|
+| `--softwood` | `#013540` | Primary dark ground |
+| `--stormcloud` | `#416870` | Secondary text on light |
+| `--seastone` | `#809AA0` | Palette reference |
+| `--muted` | `#93ADB3` | Seastone lightened — body text on dark |
+| `--iron` | `#BFCCCF` | Light neutral, borders |
+| `--lime` | `#B1F727` | CTAs, accents, the benefits band |
+| `--ink` / `--paper` | `#011F26` / `#F4F7F7` | Derived deep dark / off-white |
+
+**Note:** Seastone at `#809AA0` measures 4.45:1 on Softwood — just under the 4.5:1 WCAG AA
+threshold for body text. `--muted` (`#93ADB3`) is used for actual text instead. All 33
+text/background pairs on the page now pass AA.
+
+## Deviations from the brief — please review
+
+1. **Palette.** The brief specifies Enerpy's own colors (`#1C6434` green, `#F9C102`
+   yellow, sage `#B6C3AA`) and says *"verde y blanco como base visual, reservando el
+   amarillo para CTAs."* You directed the Softwood/Electric-Lime palette instead, so the
+   brief's palette is not used anywhere on the page.
+
+2. **Logo.** `img/enerpy-lime.svg` is the Enerpy mark recolored — circle to Electric Lime,
+   wordmark to white, leaf to Softwood — so it doesn't clash with the new system. The
+   original yellow/olive files in `Assets/` are untouched. `img/enerpy-lime-dark.svg` is
+   the same mark with a dark wordmark, for light backgrounds.
+
+3. **Two claims are hedged.** The brief's own notes require validation before publishing
+   these, so they are softened on the page rather than stated outright:
+   - *"tecnología patentada"* (brief §5) → rendered as **"Tecnología propia registrada"**
+   - *"créditos de carbono"* (brief §7) → rendered as **"Potencial de valorización del
+     residuo"**, with no carbon-credit claim
+
+   Confirm both with the client before going live, then adjust §6 (Tecnología RMO) and
+   §8 (Beneficios) in `index.html` if they're cleared.
+
+4. **Client logos.** All 14 marks from `Assets/Img/Logos/Clientes` are in the trust
+   marquee, per your instruction. The brief lists the authorized list as still pending
+   (*"Mostrar únicamente logos previamente validados y autorizados"*) — worth confirming
+   before this goes public.
+
+## Content rules honored
+
+Everything on the page comes from the brief; nothing was invented. No prices, no
+certifications or regulatory seals, no absolute claims. Every mention of RMO® results
+carries the qualifier that outcomes depend on the waste and require prior technical
+evaluation. Primary CTA is **"Solicitar evaluación técnica"** throughout, per brief
+note #7.
+
+## SEO / GEO
+
+- `lang="es-PY"`, title and description built on *"gestión de residuos industriales en Paraguay"*
+- Open Graph + Twitter Card tags
+- JSON-LD: `Organization`, `WebSite`, `Service`, and `FAQPage` mirroring all 5 rendered Q&As
+- FAQ answers written as declarative single sentences so AI assistants can extract them
+
+Absolute URLs in the meta tags and JSON-LD assume `https://enerpyambiental.com.py/`.
+Update them if the demo is hosted elsewhere.
+
+## Accessibility
+
+- Skip link is first in tab order and becomes visible on focus
+- Lime 3px `:focus-visible` ring on every interactive element
+- FAQ uses native `<details>/<summary>`; stepper exposes `aria-current`
+- All motion — marquee, reveals, chips, stepper auto-advance — stops under
+  `prefers-reduced-motion: reduce`
+- Content is never permanently hidden if JS fails: reveal animations are gated on a `js` class
+
+## Verified
+
+Checked at 375 / 768 / 1280 px: no horizontal overflow at any width, no console errors,
+all 39 images load, JSON-LD parses, 33/33 contrast pairs pass AA. Total page weight ~868 KB.

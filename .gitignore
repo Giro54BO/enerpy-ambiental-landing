@@ -1,0 +1,8 @@
+# macOS
+.DS_Store
+
+# Internal client material — never publish
+Context/
+
+# Source assets (originals live with the agency; the web-ready copies are in img/)
+Assets/
