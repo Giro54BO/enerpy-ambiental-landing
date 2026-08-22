@@ -49,10 +49,17 @@ text/background pairs on the page now pass AA.
    amarillo para CTAs."* You directed the Softwood/Electric-Lime palette instead, so the
    brief's palette is not used anywhere on the page.
 
-2. **Logo.** `img/enerpy-lime.svg` is the Enerpy mark recolored — circle to Electric Lime,
-   wordmark to white, leaf to Softwood — so it doesn't clash with the new system. The
-   original yellow/olive files in `Assets/` are untouched. `img/enerpy-lime-dark.svg` is
-   the same mark with a dark wordmark, for light backgrounds.
+2. **Logo — used exactly as supplied.** At the client's request the brand mark is not
+   modified in any way. `img/enerpy-white.svg` and `img/enerpy-color.svg` are byte-for-byte
+   copies of `logoAmbiental-white.svg` and `logoAmbiental.svg`. The white mark appears in
+   the nav and footer (both dark grounds); the full-colour mark is the favicon and the
+   `Organization.logo` in the structured data, since a white logo would be invisible on a
+   light browser tab.
+
+   One observation, not a change: in the supplied white asset the wordmark is `#FFFFFF`
+   and the circle behind "Py" is `#E8E8E8`, so those two glyphs sit at low contrast
+   against the circle. It reads fine as a monochrome mark, but if the client ever wants
+   more separation that needs a new export from their side — nothing here touches it.
 
 3. **Two claims are hedged.** The brief's own notes require validation before publishing
    these, so they are softened on the page rather than stated outright:
