@@ -50,16 +50,26 @@ text/background pairs on the page now pass AA.
    brief's palette is not used anywhere on the page.
 
 2. **Logo — one deliberate tonal adjustment.** In the supplied white asset the wordmark
-   is `#FFFFFF` and the circle behind "Py" is `#E8E8E8`, which gives those two glyphs only
-   **1.23:1** contrast against their own circle — they visually disappear on a dark ground.
+   is `#FFFFFF` and the circle behind "Py" is `#E8E8E8` — only **1.23:1** apart, so those
+   two glyphs visually disappear into their own circle on a dark ground.
 
-   `img/enerpy-white-adjusted.svg` darkens **only** that circle to `#8A8A8A`. Diffed
-   against the source it is a single changed hex value: the wordmark, the leaf, the
-   gradient and all geometry are untouched. The result gives the "Py" **3.45:1** (clearing
-   the 3:1 bar for large text) while the circle still reads as a light disc at 4.96:1 on
-   the nav and 3.84:1 on the footer.
+   `img/enerpy-white-adjusted.svg` darkens **only** that circle to `#93ADB3`, the same
+   value as the `--muted` token in `styles.css`, so the mark reads as part of the site's
+   palette rather than a neutral grey. Diffed against the source it is a single changed
+   hex value — wordmark, leaf, gradient and all geometry are untouched.
 
-   The pristine files ship alongside it and nothing overwrites them:
+   | | contrast |
+   |---|---|
+   | White "Py" against the circle | 1.23:1 → **2.37:1** |
+   | Circle against the nav (`#011F26`) | 7.24:1 |
+   | Circle against the footer (`#013540`) | 5.60:1 |
+
+   Note that WCAG 1.4.11 explicitly exempts logotypes from contrast requirements, so this
+   is an aesthetic judgement, not a compliance one. A neutral `#8A8A8A` would push the
+   "Py" to 3.45:1 and `#809AA0` (Seastone) to 2.98:1 if more separation is ever wanted —
+   both are a one-value edit in that file.
+
+   The pristine files ship alongside and nothing overwrites them:
    - `img/enerpy-white.svg` — byte-for-byte copy of `logoAmbiental-white.svg`
    - `img/enerpy-color.svg` — byte-for-byte copy of `logoAmbiental.svg`
 
