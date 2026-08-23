@@ -49,17 +49,28 @@ text/background pairs on the page now pass AA.
    amarillo para CTAs."* You directed the Softwood/Electric-Lime palette instead, so the
    brief's palette is not used anywhere on the page.
 
-2. **Logo — used exactly as supplied.** At the client's request the brand mark is not
-   modified in any way. `img/enerpy-white.svg` and `img/enerpy-color.svg` are byte-for-byte
-   copies of `logoAmbiental-white.svg` and `logoAmbiental.svg`. The white mark appears in
-   the nav and footer (both dark grounds); the full-colour mark is the favicon and the
-   `Organization.logo` in the structured data, since a white logo would be invisible on a
-   light browser tab.
+2. **Logo — one deliberate tonal adjustment.** In the supplied white asset the wordmark
+   is `#FFFFFF` and the circle behind "Py" is `#E8E8E8`, which gives those two glyphs only
+   **1.23:1** contrast against their own circle — they visually disappear on a dark ground.
 
-   One observation, not a change: in the supplied white asset the wordmark is `#FFFFFF`
-   and the circle behind "Py" is `#E8E8E8`, so those two glyphs sit at low contrast
-   against the circle. It reads fine as a monochrome mark, but if the client ever wants
-   more separation that needs a new export from their side — nothing here touches it.
+   `img/enerpy-white-adjusted.svg` darkens **only** that circle to `#8A8A8A`. Diffed
+   against the source it is a single changed hex value: the wordmark, the leaf, the
+   gradient and all geometry are untouched. The result gives the "Py" **3.45:1** (clearing
+   the 3:1 bar for large text) while the circle still reads as a light disc at 4.96:1 on
+   the nav and 3.84:1 on the footer.
+
+   The pristine files ship alongside it and nothing overwrites them:
+   - `img/enerpy-white.svg` — byte-for-byte copy of `logoAmbiental-white.svg`
+   - `img/enerpy-color.svg` — byte-for-byte copy of `logoAmbiental.svg`
+
+   Nav and footer use the adjusted file. The favicon and the `Organization.logo` in the
+   structured data use the full-colour original, since a white mark would be invisible on
+   a light browser tab. **To revert:** point the two `<img>` tags in `index.html` back at
+   `img/enerpy-white.svg`.
+
+   Since the client asked that their mark not be modified, this adjustment is worth
+   clearing with them — or asking them for a white export with more tonal separation,
+   which would remove the need for it entirely.
 
 3. **Two claims are hedged.** The brief's own notes require validation before publishing
    these, so they are softened on the page rather than stated outright:
