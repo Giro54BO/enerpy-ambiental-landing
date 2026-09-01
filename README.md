@@ -24,6 +24,24 @@ Then open `http://localhost:4173`. No build step, no dependencies — deploy by 
 | `img/` | Web-ready images, renamed and re-encoded from `Assets/Img/` |
 | `Assets/`, `Context/` | Local source material — excluded from this repo, see below |
 
+## Typography
+
+Driven entirely by CSS custom properties in `:root` — a `--fs-*` scale plus composite
+`--type-*` tokens using the `font` shorthand. Because `letter-spacing` is not part of that
+shorthand, each token carries a paired `--type-*-ls` applied in a second declaration:
+
+```css
+.h2{ font:var(--type-h2); letter-spacing:var(--type-h2-ls); }
+```
+
+One family throughout: **Archivo** (`--font-sans`), loaded at 300/400/500/600/700 plus
+400/500 italic. Root size is `--fs-root:16px`.
+
+Five tokens are defined but currently unused, because this page has no element that fits
+them — `--type-nav` (3.4rem, sized for a full-screen menu; the compact nav bar uses
+`--type-sm`), `--type-marquee` (the marquee holds logos, not text), `--type-stat`,
+`--type-italic`, and `--type-label-3xs`. They are left in place for future sections.
+
 ## Palette
 
 The palette image you supplied, as tokens in `styles.css`:
@@ -101,8 +119,13 @@ text/background pairs on the page now pass AA.
 Everything on the page comes from the brief; nothing was invented. No prices, no
 certifications or regulatory seals, no absolute claims. Every mention of RMO® results
 carries the qualifier that outcomes depend on the waste and require prior technical
-evaluation. Primary CTA is **"Solicitar evaluación técnica"** throughout, per brief
-note #7.
+evaluation.
+
+**CTA:** every call to action reads **"Hablar con un experto"** with a WhatsApp icon and
+links to `wa.me/595985121470`. Note this follows the brief's *"Texto de CTA principal:
+Hablar con un especialista / Hablar con un asesor"* (p.7) but departs from its later
+note #7, which asks that *"Solicitar evaluación técnica"* stay the primary CTA so
+conversion points at an evaluation rather than a direct contact. Flagged for the client.
 
 ## SEO / GEO
 
