@@ -114,6 +114,32 @@ text/background pairs on the page now pass AA.
    (*"Mostrar únicamente logos previamente validados y autorizados"*) — worth confirming
    before this goes public.
 
+## Pending content — nothing here is invented
+
+Two placeholder systems, both deliberately impossible to mistake for real content:
+
+| What | Where | How it renders |
+|---|---|---|
+| 6 case figures | `#casos` | `.is-pending` — a dashed blank field, not a number |
+| 7 category visuals | `#residuos` | `img/residuos/*.svg`, each labelled `IMAGEN PENDIENTE` |
+
+```bash
+grep -c "is-pending" index.html   # 6 — figures still awaiting real data
+ls img/residuos/                  # 7 — category photos still placeholder
+```
+
+- **Arcor figures** (`X toneladas`, `X años`) arrived as literal placeholders in the client's
+  brief for this section. The brief forbids inventing figures, so they stay blank until real
+  numbers are supplied.
+- **BASF and Copetrol** are illustrative scaffolding chosen from the existing client logos —
+  they need confirming, and carry the same pending-authorization caveat as the marquee.
+- **Category photos**: brief note #3 asks for real plant/waste photography rather than stock,
+  so these placeholders want real photos, not stock replacements.
+- **Testimonials** render with *cargo* + *industria* exactly as supplied. Name and empresa are
+  still missing — the client raised this herself. Deliberately **no `Review` structured data**
+  until then: Google requires a named reviewer, and marking up unattributed quotes as reviews
+  risks a fabricated-social-proof penalty.
+
 ## Content rules honored
 
 Everything on the page comes from the brief; nothing was invented. No prices, no
@@ -161,4 +187,10 @@ a public repository and that material is internal. The web-ready images live in 
 ## Verified
 
 Checked at 375 / 768 / 1280 px: no horizontal overflow at any width, no console errors,
-all 39 images load, JSON-LD parses, 33/33 contrast pairs pass AA. Total page weight ~868 KB.
+all 49 images load, JSON-LD parses, and **190/190 visible text elements pass WCAG AA**.
+
+The contrast check composites `rgba` layers properly — both foreground alpha and every
+translucent ancestor background. An earlier naive version ignored alpha and produced both
+false positives (white-on-softwood quotes reported as 1.00:1) and false negatives; two real
+misses only surfaced once compositing was correct: `.ben__n` at 3.14:1 and `.is-pending` at
+2.98:1, both now on `--stormcloud`.

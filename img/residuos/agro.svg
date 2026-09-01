@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 360" width="480" height="360" role="img" aria-label="Imagen pendiente">
+  <!-- PLACEHOLDER: reemplazar por fotografía real de planta/residuo (brief nota #3: evitar stock) -->
+  <rect width="480" height="360" fill="#DDE5E7"/>
+  <g transform="translate(240 158) scale(3.9) translate(-12 -12)"
+     fill="none" stroke="#416870" stroke-width="1.35"
+     stroke-linecap="round" stroke-linejoin="round" opacity=".62">
+    <path d="M12 20c0-5 3-9 8-10-1 6-3.6 9-8 10Z"/><path d="M12 20c0-5-3-9-8-10 1 6 3.6 9 8 10Z"/><path d="M12 20v-4"/>
+  </g>
+  <text x="240" y="286" text-anchor="middle"
+        font-family="Archivo, Helvetica Neue, Arial, sans-serif"
+        font-size="15" font-weight="700" letter-spacing="2.4" fill="#7C939A">IMAGEN PENDIENTE</text>
+</svg>
