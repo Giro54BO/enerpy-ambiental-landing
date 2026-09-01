@@ -120,7 +120,7 @@ Two placeholder systems, both deliberately impossible to mistake for real conten
 
 | What | Where | How it renders |
 |---|---|---|
-| 6 case figures | `#casos` | `.is-pending` — a dashed blank field, not a number |
+| 6 case figures | `#casos` | Reference numbers under `.is-pending` (dashed underline) + a visible disclaimer in the section |
 | 7 category visuals | `#residuos` | `img/residuos/*.svg`, each labelled `IMAGEN PENDIENTE` |
 
 ```bash
@@ -128,9 +128,17 @@ grep -c "is-pending" index.html   # 6 — figures still awaiting real data
 ls img/residuos/                  # 7 — category photos still placeholder
 ```
 
+**The case figures on the page are NOT real.** Arcor 1.200 t / 8 años, BASF 850 t / 5 años,
+Copetrol 640 t / 6 años are reference values added at the user's request so the layout can be
+reviewed with numbers in it. They are marked three ways: the `.is-pending` dashed underline,
+an HTML comment on each `<dd>`, and a visible note in the section itself. **Before publishing
+as final:** replace with confirmed values, then remove `.is-pending` from those elements and
+delete the disclaimer paragraph.
+
 - **Arcor figures** (`X toneladas`, `X años`) arrived as literal placeholders in the client's
-  brief for this section. The brief forbids inventing figures, so they stay blank until real
-  numbers are supplied.
+  brief for this section. The brief forbids inventing figures — *"No inventar información,
+  cifras, años de experiencia…"* — so the numbers now shown are explicitly labelled reference
+  values, not data, pending the real figures.
 - **BASF and Copetrol** are illustrative scaffolding chosen from the existing client logos —
   they need confirming, and carry the same pending-authorization caveat as the marquee.
 - **Category photos**: brief note #3 asks for real plant/waste photography rather than stock,
