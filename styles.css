@@ -181,6 +181,11 @@ section[id]{scroll-margin-top:122px}
 
 .sec__head{max-width:58ch;margin-bottom:clamp(40px,5vw,64px)}
 .sec__head--wide{max-width:none}
+/* centred head: the container stops constraining, the heading keeps its own
+   measure so it wraps to a few balanced lines instead of one long ruler */
+.sec__head--center{max-width:none;text-align:center}
+.sec__head--center .h2{max-width:22ch;margin-inline:auto;text-wrap:balance}
+.sec__head--center .lede{margin-inline:auto}
 
 /* ---------------- nav ---------------- */
 .nav{
@@ -652,7 +657,7 @@ section[id]{scroll-margin-top:122px}
     transition-duration:.001ms !important;
   }
   .js .reveal{opacity:1;transform:none}
-  .marquee__track{animation:none}
+  .marquee__track,.techloop__track,.quoteloop__track{animation:none}
   .step__d{max-height:none;opacity:1;margin-top:8px}
 }
 
@@ -693,7 +698,6 @@ section[id]{scroll-margin-top:122px}
 @media (max-width:700px){.cases{grid-template-columns:1fr}}
 
 /* ---------------- testimonios ---------------- */
-.quotes{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
 .quote{
   display:flex;flex-direction:column;
   padding:30px 28px 32px;
@@ -724,8 +728,6 @@ section[id]{scroll-margin-top:122px}
 }
 .quote__ind{font:var(--type-xs);letter-spacing:var(--type-xs-ls);color:var(--muted)}
 
-@media (max-width:1040px){.quotes{grid-template-columns:repeat(2,1fr)}}
-@media (max-width:700px){.quotes{grid-template-columns:1fr}}
 
 /* ---------------- residuo card media ---------------- */
 .waste__media{
@@ -747,3 +749,47 @@ section[id]{scroll-margin-top:122px}
 
 /* .note is authored for dark grounds; --muted only reaches ~2.3:1 on --paper */
 .sec--paper .note{color:var(--stormcloud);border-left-color:var(--iron);margin-top:clamp(28px,3vw,40px)}
+
+/* ---------------- RMO technology carousel ---------------- */
+/* reuses the marquee's @keyframes slide: two identical halves, -50% translate */
+.techloop{
+  overflow:hidden;
+  margin-top:clamp(40px,5vw,64px);
+  -webkit-mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);
+  mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);
+}
+.techloop__track{display:flex;width:max-content;animation:slide 54s linear infinite}
+.techloop:hover .techloop__track,
+.techloop:focus-within .techloop__track{animation-play-state:paused}
+.techloop__group{
+  display:flex;gap:20px;
+  margin:0;padding:0 20px 0 0;list-style:none;
+}
+.tcard{
+  flex:none;width:300px;
+  display:flex;flex-direction:column;gap:18px;
+  padding:30px 28px 32px;
+  background:var(--white);
+  border:1px solid var(--line-light);
+  border-radius:var(--r-lg);
+}
+.tcard__ico{
+  display:grid;place-items:center;flex:none;
+  width:46px;height:46px;border-radius:14px;
+  background:var(--lime);color:var(--softwood);
+}
+.tcard__ico svg{width:22px;height:22px}
+.tcard__t{margin:0;font:var(--type-card);letter-spacing:var(--type-card-ls);color:var(--softwood)}
+
+/* ---------------- testimonials carousel ---------------- */
+/* same loop as .techloop, but slower: these are read, not scanned */
+.quoteloop{
+  overflow:hidden;
+  -webkit-mask-image:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent);
+  mask-image:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent);
+}
+.quoteloop__track{display:flex;width:max-content;animation:slide 86s linear infinite}
+.quoteloop:hover .quoteloop__track,
+.quoteloop:focus-within .quoteloop__track{animation-play-state:paused}
+.quoteloop__group{display:flex;gap:20px;margin:0;padding:0 20px 0 0;list-style:none}
+.quoteloop .quote{flex:none;width:min(380px,82vw)}
