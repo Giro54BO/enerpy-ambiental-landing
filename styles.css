@@ -283,10 +283,20 @@ section[id]{scroll-margin-top:122px}
 .hero__scrim{
   position:absolute;inset:0;z-index:-1;
   background:
-    linear-gradient(180deg,rgba(1,31,38,.88) 0%,rgba(1,31,38,.40) 22%,rgba(1,42,51,.80) 52%,rgba(1,53,64,.94) 82%,var(--softwood) 100%),
-    radial-gradient(115% 85% at 12% 92%,rgba(1,53,64,.92),transparent 62%);
+    linear-gradient(180deg,rgba(1,31,38,.62) 0%,rgba(1,31,38,.22) 22%,rgba(1,42,51,.55) 52%,rgba(1,53,64,.78) 82%,var(--softwood) 100%),
+    radial-gradient(115% 85% at 12% 92%,rgba(1,53,64,.68),transparent 62%);
 }
 .hero__inner{position:relative}
+/* The hero eyebrow is 10.7px lime on bright foliage — the same hue family, so it
+   cannot reach 4.5:1 from the scrim alone at any opacity the design tolerates.
+   A small translucent chip gives it a known dark surface and leaves the rest of
+   the photograph light. */
+.hero__inner .eyebrow{
+  display:inline-block;
+  background:rgba(1,31,38,.68);
+  padding:7px 13px;border-radius:999px;
+  backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px);
+}
 .hero__title{
   font:var(--type-hero);letter-spacing:var(--type-hero-ls);
   color:var(--white);max-width:17ch;
@@ -300,7 +310,7 @@ section[id]{scroll-margin-top:122px}
 
 @media (max-width:1100px){
   .hero__scrim{
-    background:linear-gradient(180deg,rgba(1,31,38,.9) 0%,rgba(1,31,38,.55) 18%,rgba(1,42,51,.86) 46%,rgba(1,53,64,.96) 80%,var(--softwood) 100%);
+    background:linear-gradient(180deg,rgba(1,31,38,.7) 0%,rgba(1,31,38,.36) 18%,rgba(1,42,51,.66) 46%,rgba(1,53,64,.86) 80%,var(--softwood) 100%);
   }
 }
 
