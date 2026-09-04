@@ -177,6 +177,7 @@ section[id]{scroll-margin-top:122px}
 .sec{padding-block:var(--sec-y)}
 .sec--tight{padding-block:clamp(56px,7vw,96px)}
 .sec--paper{background:var(--paper)}
+.sec--white{background:var(--white)}
 .sec--dark{background:var(--softwood)}
 .sec--lime{background:var(--lime)}
 

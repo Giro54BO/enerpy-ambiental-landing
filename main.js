@@ -115,6 +115,29 @@
     show(0);
   }
 
+  /* ---- keep the -50% loops continuous on wide screens ---- */
+  /* Two identical halves translated -50% only read as seamless while one half is
+     at least as wide as the viewport; below that a gap crosses the screen at the
+     end of each cycle. Clone cards until the half is wide enough. screen.width
+     is used as well as innerWidth so maximising the window cannot reintroduce it. */
+  var target = Math.max(window.innerWidth, screen.width || 0);
+  document.querySelectorAll('.techloop__track, .quoteloop__track').forEach(function (track) {
+    var halves = track.children;
+    if (halves.length < 2) return;
+    var unique = Array.prototype.slice.call(halves[0].children);
+    if (!unique.length) return;
+    var guard = 0;
+    while (halves[0].getBoundingClientRect().width < target && guard++ < 12) {
+      unique.forEach(function (card) {
+        Array.prototype.forEach.call(halves, function (half) {
+          var copy = card.cloneNode(true);
+          copy.setAttribute('aria-hidden', 'true');   // repeats are decorative
+          half.appendChild(copy);
+        });
+      });
+    }
+  });
+
   /* ---- scroll reveal ---- */
   var revealables = document.querySelectorAll('.reveal');
 
