@@ -283,8 +283,10 @@ section[id]{scroll-margin-top:122px}
 .hero__scrim{
   position:absolute;inset:0;z-index:-1;
   background:
-    linear-gradient(180deg,rgba(1,31,38,.62) 0%,rgba(1,31,38,.22) 22%,rgba(1,42,51,.55) 52%,rgba(1,53,64,.78) 82%,var(--softwood) 100%),
-    radial-gradient(115% 85% at 12% 92%,rgba(1,53,64,.68),transparent 62%);
+    /* the whole ramp is --ink so the hero terminates in exactly the colour of
+       the .clients band below it — no seam where the two sections meet */
+    linear-gradient(180deg,rgba(1,31,38,.62) 0%,rgba(1,31,38,.32) 22%,rgba(1,31,38,.58) 52%,rgba(1,31,38,.82) 82%,var(--ink) 100%),
+    radial-gradient(115% 85% at 12% 92%,rgba(1,31,38,.68),transparent 62%);
 }
 .hero__inner{position:relative}
 /* The hero eyebrow is 10.7px lime on bright foliage — the same hue family, so it
@@ -310,7 +312,7 @@ section[id]{scroll-margin-top:122px}
 
 @media (max-width:1100px){
   .hero__scrim{
-    background:linear-gradient(180deg,rgba(1,31,38,.7) 0%,rgba(1,31,38,.36) 18%,rgba(1,42,51,.66) 46%,rgba(1,53,64,.86) 80%,var(--softwood) 100%);
+    background:linear-gradient(180deg,rgba(1,31,38,.7) 0%,rgba(1,31,38,.36) 18%,rgba(1,31,38,.66) 46%,rgba(1,31,38,.86) 80%,var(--ink) 100%);
   }
 }
 
