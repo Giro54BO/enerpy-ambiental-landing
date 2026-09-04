@@ -621,6 +621,9 @@ section[id]{scroll-margin-top:122px}
   transition:color .18s ease;
   overflow-wrap:anywhere;
 }
+/* icon + label; the label keeps its own box so long values still wrap */
+.foot__cols a.ico-link{display:flex;align-items:center;gap:.55em}
+.foot__cols a.ico-link span{min-width:0;overflow-wrap:anywhere}
 .foot__cols a:hover{color:var(--lime)}
 
 .foot__legal{
