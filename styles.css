@@ -59,7 +59,7 @@
   --type-xs:400 var(--fs-xs)/1.55 var(--font-sans);             --type-xs-ls:normal;
   --type-2xs:400 var(--fs-2xs)/1.5 var(--font-sans);            --type-2xs-ls:normal;
   --type-italic:italic 400 var(--fs-sm)/1.6 var(--font-sans);   --type-italic-ls:normal;
-  --type-btn:italic 500 var(--fs-xs)/1 var(--font-sans);        --type-btn-ls:.09em;
+  --type-btn:500 var(--fs-xs)/1 var(--font-sans);               --type-btn-ls:.09em;
   --type-address:400 var(--fs-sm)/1.7 var(--font-sans);         --type-address-ls:normal;
 
   /* Versalitas */
@@ -123,6 +123,7 @@ h1,h2,h3{margin:0}
   display:inline-flex;align-items:center;justify-content:center;
   gap:.5em;
   font:var(--type-btn);letter-spacing:var(--type-btn-ls);
+  text-transform:uppercase;
   padding:16px 30px;border-radius:999px;
   background:var(--btn-bg);color:var(--btn-fg);
   border:1.5px solid var(--btn-bd);
