@@ -30,7 +30,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
 <script>document.documentElement.classList.add('js')</script>
-<link rel="stylesheet" href="styles.css?v=20">
+<link rel="stylesheet" href="styles.css?v=21">
 </head>
 <body>
 
@@ -163,44 +163,26 @@
 <!-- ============ 3. PROBLEMA EMPRESARIAL ============ -->
 <section class="sec sec--paper" id="problema">
   <div class="wrap">
-    <div class="sec__head reveal">
-      <p class="eyebrow eyebrow--dark">El problema</p>
-      <h2 class="h2">Retirar un residuo no significa garantizar su destino final.</h2>
-      <p class="lede">
-        Una gestión responsable también implica conocer cómo será tratado, cuál será su destino
-        y qué documentación respalda el proceso. Cuando esa trazabilidad no existe, aumentan la
-        incertidumbre y los riesgos ambientales, operativos y reputacionales para la organización.
-      </p>
+    <div class="problema__head reveal">
+      <div class="sec__head">
+        <p class="eyebrow eyebrow--dark">El problema</p>
+        <h2 class="h2">Retirar un residuo no significa garantizar su destino final.</h2>
+      </div>
+      <p class="lede">Una gestión responsable también implica conocer cómo será tratado, cuál será su destino y qué documentación respalda el proceso. Cuando esa trazabilidad no existe, aumentan la incertidumbre y los riesgos ambientales, operativos y reputacionales para la organización.</p>
     </div>
 
-    <ul class="grid grid--4 cards">
-      <li class="card reveal">
-        <span class="card__ico" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s7-5.2 7-11a7 7 0 1 0-14 0c0 5.8 7 11 7 11Z"/><circle cx="12" cy="10" r="2.6"/></svg>
-        </span>
-        <h3 class="card__t">Destino</h3>
-        <p class="card__d">Saber qué ocurre finalmente con el residuo.</p>
+    <ul class="psteps reveal">
+      <li class="pstep">
+        <img src="img/problema/paso-1.webp" alt="Residuos industriales acumulados a la espera de una salida adecuada" width="300" height="300" loading="lazy" decoding="async">
       </li>
-      <li class="card reveal">
-        <span class="card__ico" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h10M4 12h7M4 17h10"/><path d="m15.5 15.5 2.2 2.2 3.3-4"/></svg>
-        </span>
-        <h3 class="card__t">Trazabilidad</h3>
-        <p class="card__d">Poder seguir y documentar su gestión.</p>
+      <li class="pstep">
+        <img src="img/problema/paso-2.webp" alt="Técnico evaluando y documentando el residuo" width="300" height="300" loading="lazy" decoding="async">
       </li>
-      <li class="card reveal">
-        <span class="card__ico" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M12 7v5l3.2 2"/></svg>
-        </span>
-        <h3 class="card__t">Control</h3>
-        <p class="card__d">Reducir la incertidumbre sobre el tratamiento realizado.</p>
+      <li class="pstep">
+        <img src="img/problema/paso-3.webp" alt="Traslado del residuo a una planta de tratamiento" width="300" height="300" loading="lazy" decoding="async">
       </li>
-      <li class="card reveal">
-        <span class="card__ico" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.2 19 6v5.3c0 4.3-2.9 7.7-7 9.5-4.1-1.8-7-5.2-7-9.5V6l7-2.8Z"/><path d="m9 12 2.2 2.2L15.4 10"/></svg>
-        </span>
-        <h3 class="card__t">Respaldo</h3>
-        <p class="card__d">Contar con evidencia documental del proceso.</p>
+      <li class="pstep">
+        <img src="img/problema/paso-4.webp" alt="Materiales y combustibles recuperados del proceso" width="300" height="306" loading="lazy" decoding="async">
       </li>
     </ul>
   </div>
@@ -468,50 +450,36 @@
 
     <ul class="cases">
       <li class="case reveal">
-        <span class="case__logo"><img src="img/clientes/arcor.webp" alt="Arcor" width="170" height="60" loading="lazy" decoding="async"></span>
+        <span class="case__logo"><img src="img/clientes/arcor.webp" alt="Arcor" height="42" loading="lazy" decoding="async"></span>
         <dl class="case__stats">
           <div>
+            <dd class="case__n is-pending">+200</dd>
             <dt>Toneladas gestionadas</dt>
-            <dd class="case__n is-pending">1.200</dd><!-- PLACEHOLDER: cifra de referencia, sin validar -->
-          </div>
-          <div>
-            <dt>Años trabajando con Enerpy</dt>
-            <dd class="case__n is-pending">8</dd><!-- PLACEHOLDER: cifra de referencia, sin validar -->
           </div>
         </dl>
         <p class="case__d">Gestión final de residuos industriales con evaluación técnica previa y trazabilidad documental del proceso.</p>
       </li>
       <li class="case reveal">
-        <span class="case__logo"><img src="img/clientes/basf.webp" alt="BASF" width="170" height="60" loading="lazy" decoding="async"></span>
+        <span class="case__logo"><img src="img/clientes/kingspan.webp" alt="Kingspan" height="42" loading="lazy" decoding="async"></span>
         <dl class="case__stats">
           <div>
+            <dd class="case__n is-pending">+130</dd>
             <dt>Toneladas gestionadas</dt>
-            <dd class="case__n is-pending">850</dd><!-- PLACEHOLDER: cifra de referencia, sin validar -->
-          </div>
-          <div>
-            <dt>Años trabajando con Enerpy</dt>
-            <dd class="case__n is-pending">5</dd><!-- PLACEHOLDER: cifra de referencia, sin validar -->
           </div>
         </dl>
-        <p class="case__d">Residuos químicos caracterizados y evaluados según compatibilidad antes de definir su alternativa de tratamiento.</p>
+        <p class="case__d">Gestión responsable de residuos, acompañada de control operativo y documentación del proceso.</p>
       </li>
       <li class="case reveal">
-        <span class="case__logo"><img src="img/clientes/copetrol.webp" alt="Copetrol" width="170" height="60" loading="lazy" decoding="async"></span>
+        <span class="case__logo"><img src="img/clientes/unilever.webp" alt="Unilever" height="42" loading="lazy" decoding="async"></span>
         <dl class="case__stats">
           <div>
+            <dd class="case__n is-pending">640</dd>
             <dt>Toneladas gestionadas</dt>
-            <dd class="case__n is-pending">640</dd><!-- PLACEHOLDER: cifra de referencia, sin validar -->
-          </div>
-          <div>
-            <dt>Años trabajando con Enerpy</dt>
-            <dd class="case__n is-pending">6</dd><!-- PLACEHOLDER: cifra de referencia, sin validar -->
           </div>
         </dl>
-        <p class="case__d">Gestión de aceites usados y envases contaminados con respaldo documental para control interno y fiscalización.</p>
+        <p class="case__d">Gestión de residuos mediante procesos documentados, con respaldo para la gestión ambiental y futuras auditorías.</p>
       </li>
     </ul>
-
-    <p class="note reveal">Cifras de referencia con fines de maquetación. Los datos definitivos de cada caso serán confirmados y validados con cada empresa antes de su publicación.</p>
   </div>
 </section>
 
@@ -820,6 +788,6 @@
 }
 </script>
 
-<script src="main.js?v=20" defer></script>
+<script src="main.js?v=21" defer></script>
 </body>
 </html>
