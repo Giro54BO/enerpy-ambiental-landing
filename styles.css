@@ -318,11 +318,19 @@ section[id]{scroll-margin-top:122px}
 
 .logo{
   flex:none;
-  display:grid;place-items:center;
-  width:170px;height:92px;padding:16px 22px;
+  /* flex, not grid: a grid item's implicit row is auto-sized, so max-height:100%
+     had no definite containing block to resolve against and was dropped —
+     leaving tall logos constrained only by width. A flex item resolves
+     percentages against the container's definite content box. */
+  display:flex;align-items:center;justify-content:center;
+  width:170px;height:104px;padding:16px 20px;
   background:var(--white);border-radius:var(--r);
 }
-.logo img{max-height:100%;width:auto;object-fit:contain}
+.logo img{
+  /* explicit box + contain: letterboxed to fit, never cropped, whatever the ratio */
+  width:100%;height:100%;
+  object-fit:contain;object-position:center;
+}
 
 @keyframes slide{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 
@@ -579,7 +587,7 @@ section[id]{scroll-margin-top:122px}
   width:150px;height:auto;margin-bottom:20px;
   /* same white chip as the nav, for the same contrast reason */
   background:var(--white);
-  padding:11px 18px;border-radius:999px;
+  padding:11px 33px;border-radius:999px;
   box-sizing:content-box;
 }
 .foot__brand p{margin:0;font:var(--type-xs);letter-spacing:var(--type-xs-ls);color:var(--muted);max-width:38ch}
