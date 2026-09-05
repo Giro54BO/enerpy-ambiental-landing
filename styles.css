@@ -317,13 +317,49 @@ section[id]{scroll-margin-top:122px}
   }
 }
 
+/* ---------------- KPI band ---------------- */
+/* --ink so the hero's gradient still terminates into an unbroken dark run */
+.kpis{background:var(--ink);padding-block:clamp(36px,4.5vw,60px)}
+.kpis__list{
+  list-style:none;margin:0;padding:0;
+  display:grid;grid-template-columns:repeat(5,1fr);
+}
+.kpi{
+  display:flex;flex-direction:column;align-items:center;
+  text-align:center;gap:10px;padding:4px 16px;
+  border-left:1px solid var(--line-dark);
+}
+.kpi:first-child{border-left:0}
+.kpi__n{
+  font:var(--type-stat);letter-spacing:var(--type-stat-ls);
+  color:var(--white);font-variant-numeric:tabular-nums;
+}
+.kpi__l{
+  font:var(--type-2xs);letter-spacing:var(--type-2xs-ls);
+  color:var(--muted);max-width:20ch;text-wrap:balance;
+}
+
+/* dividers only survive the 5-across layout; below that, plain gaps read better
+   than nth-child border gymnastics that break at every reflow */
+@media (max-width:1040px){
+  .kpis__list{grid-template-columns:repeat(3,1fr);gap:32px 20px}
+  .kpi{border-left:0;padding-inline:8px}
+}
+@media (max-width:620px){
+  /* minmax(0,1fr) rather than 1fr: the widest figure (+8.000.000) has an
+     intrinsic width that otherwise forces its column wider than the others */
+  .kpis__list{grid-template-columns:repeat(2,minmax(0,1fr));gap:28px 16px}
+  .kpi__n{font-size:1.55rem}
+  .kpi:last-child{grid-column:1/-1}
+}
+
 /* ---------------- 2. clients marquee ---------------- */
-.clients{background:var(--ink);padding-block:clamp(48px,6vw,72px)}
+.clients{background:var(--white);padding-block:clamp(48px,6vw,72px)}
 .clients__label{
   margin:0 0 32px;
   font:var(--type-label-sm);letter-spacing:var(--type-label-sm-ls);
   text-transform:uppercase;
-  color:var(--muted);text-align:center;
+  color:var(--stormcloud);text-align:center;
 }
 .marquee{
   overflow:hidden;
@@ -343,7 +379,7 @@ section[id]{scroll-margin-top:122px}
      percentages against the container's definite content box. */
   display:flex;align-items:center;justify-content:center;
   width:170px;height:104px;padding:16px 20px;
-  background:var(--white);border-radius:var(--r);
+  background:transparent;border-radius:var(--r);
 }
 .logo img{
   /* explicit box + contain: letterboxed to fit, never cropped, whatever the ratio */
@@ -599,7 +635,7 @@ section[id]{scroll-margin-top:122px}
 /* ---------------- footer ---------------- */
 .foot{background:var(--softwood);color:var(--iron);overflow:hidden}
 .foot__top{
-  display:grid;grid-template-columns:1.1fr 2fr;gap:clamp(32px,5vw,64px);
+  display:grid;grid-template-columns:1fr 2.3fr;gap:clamp(32px,5vw,64px);
   padding-block:clamp(56px,7vw,88px) 48px;
 }
 .foot__brand img{
@@ -611,7 +647,7 @@ section[id]{scroll-margin-top:122px}
 }
 .foot__brand p{margin:0;font:var(--type-xs);letter-spacing:var(--type-xs-ls);color:var(--muted);max-width:38ch}
 
-.foot__cols{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
+.foot__cols{display:grid;grid-template-columns:1fr 1fr 1.5fr;gap:28px}
 .foot__cols h3{
   font:var(--type-label-sm);letter-spacing:var(--type-label-sm-ls);
   text-transform:uppercase;color:var(--lime);margin-bottom:16px;
@@ -625,6 +661,13 @@ section[id]{scroll-margin-top:122px}
 /* icon + label; the label keeps its own box so long values still wrap */
 .foot__cols a.ico-link{display:flex;align-items:center;gap:.55em}
 .foot__cols a.ico-link span{min-width:0;overflow-wrap:anywhere}
+/* the email is the one string that cannot break: 32 characters with no spaces.
+   It gets nowrap plus a slightly smaller size, and the Contacto column is widened
+   above to hold it. */
+.foot__cols a[href^="mailto"] span{
+  white-space:nowrap;overflow-wrap:normal;
+  font-size:var(--fs-xs);
+}
 .foot__cols a:hover{color:var(--lime)}
 
 .foot__legal{
@@ -632,6 +675,8 @@ section[id]{scroll-margin-top:122px}
   padding-bottom:40px;border-top:1px solid var(--line-dark);padding-top:26px;
 }
 .foot__legal p{margin:0;font:var(--type-2xs);letter-spacing:var(--type-2xs-ls);color:var(--muted);max-width:62ch}
+.foot__legal a{color:var(--iron);text-decoration:none;border-bottom:1px solid rgba(191,204,207,.35);transition:color .18s ease,border-color .18s ease}
+.foot__legal a:hover{color:var(--lime);border-bottom-color:currentColor}
 
 .foot__mark{
   font:var(--type-display);letter-spacing:var(--type-display-ls);
@@ -643,9 +688,13 @@ section[id]{scroll-margin-top:122px}
   user-select:none;
 }
 
+@media (max-width:1120px){
+  .foot__cols{grid-template-columns:repeat(2,1fr)}
+  /* Contacto spans the row so the address always has the full width */
+  .foot__cols>div:last-child{grid-column:1/-1}
+}
 @media (max-width:860px){
   .foot__top{grid-template-columns:1fr}
-  .foot__cols{grid-template-columns:repeat(2,1fr)}
 }
 @media (max-width:520px){
   .foot__cols{grid-template-columns:1fr}
