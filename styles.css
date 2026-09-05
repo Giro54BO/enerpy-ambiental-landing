@@ -693,7 +693,11 @@ section[id]{scroll-margin-top:122px}
 .case__logo img{height:100%;width:auto;max-width:150px;object-fit:contain;object-position:left center}
 
 .case__stats{margin:0 0 22px;display:grid;gap:16px}
-.case__logo img{height:42px;width:auto;max-width:170px}
+.case__logo img{
+  height:42px;width:auto;max-width:170px;
+  /* client marks read as one set rather than four competing brand palettes */
+  filter:grayscale(1);
+}
 .case__stats>div{display:flex;flex-direction:column;gap:6px}
 .case__stats dt{
   font:var(--type-label-sm);letter-spacing:var(--type-label-sm-ls);
