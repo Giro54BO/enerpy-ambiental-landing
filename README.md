@@ -211,11 +211,11 @@ traced back or re-downloaded at higher resolution:
 
 | Category | Pexels ID |
 |---|---|
-| RAEE | 7598913 |
+| RAEE | 38411741 |
 | NFU | 38448743 |
-| Aceites usados | 2946621 |
+| Aceites usados | 13065697 |
 | Tintas y pinturas | 30548776 |
-| Envases contaminados | 16244327 |
+| Envases contaminados | 209230 |
 | Agroindustriales | 36063252 |
 | Otros residuos especiales | 6537735 |
 
