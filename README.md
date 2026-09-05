@@ -121,7 +121,7 @@ Two placeholder systems, both deliberately impossible to mistake for real conten
 | What | Where | How it renders |
 |---|---|---|
 | 6 case figures | `#casos` | Reference numbers under `.is-pending` (dashed underline) + a visible disclaimer in the section |
-| 7 category visuals | `#residuos` | `img/residuos/*.svg`, each labelled `IMAGEN PENDIENTE` |
+| 7 category visuals | `#residuos` | Now real photographs — see *Image sources* below |
 
 ```bash
 grep -c "is-pending" index.html   # 6 — figures still awaiting real data
@@ -202,3 +202,29 @@ translucent ancestor background. An earlier naive version ignored alpha and prod
 false positives (white-on-softwood quotes reported as 1.00:1) and false negatives; two real
 misses only surfaced once compositing was correct: `.ben__n` at 3.14:1 and `.is-pending` at
 2.98:1, both now on `--stormcloud`.
+
+## Image sources
+
+The `#residuos` category photographs come from **Pexels**, whose licence permits
+commercial use with no attribution required. Photo IDs are recorded so each can be
+traced back or re-downloaded at higher resolution:
+
+| Category | Pexels ID |
+|---|---|
+| RAEE | 7598913 |
+| NFU | 38448743 |
+| Aceites usados | 2946621 |
+| Tintas y pinturas | 30548776 |
+| Envases contaminados | 16244327 |
+| Agroindustriales | 36063252 |
+| Otros residuos especiales | 6537735 |
+
+Each is centre-cropped to 4:3 and encoded to webp at q74 (25–73KB).
+
+Two choices worth knowing: **soy** was picked for the agro category because it is
+Paraguay's dominant agro-industry, and **an industrial treatment plant** rather than a
+landfill for "otros residuos especiales" — a pollution image argues against a company
+whose service is preventing it.
+
+Brief note #3 still asks for real Enerpy plant photography over stock. These are stock
+and should be replaced when the client supplies their own.
