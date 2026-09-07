@@ -290,6 +290,13 @@ section[id]{scroll-margin-top:122px}
     radial-gradient(115% 85% at 12% 92%,rgba(1,31,38,.68),transparent 62%);
 }
 .hero__inner{position:relative}
+/* small flag above the eyebrow. It sits directly on the photograph, so a hairline
+   ring and a soft shadow keep its edges readable over any part of the image. */
+.hero__flag{display:block;line-height:0;margin:0 0 14px}
+.hero__flag svg{
+  width:26px;height:auto;display:block;border-radius:3px;
+  box-shadow:0 0 0 1px rgba(255,255,255,.4), 0 2px 8px rgba(1,31,38,.5);
+}
 /* The hero eyebrow is 10.7px lime on bright foliage — the same hue family, so it
    cannot reach 4.5:1 from the scrim alone at any opacity the design tolerates.
    A small translucent chip gives it a known dark surface and leaves the rest of

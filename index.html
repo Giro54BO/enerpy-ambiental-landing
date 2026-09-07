@@ -30,7 +30,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
 <script>document.documentElement.classList.add('js')</script>
-<link rel="stylesheet" href="styles.css?v=30">
+<link rel="stylesheet" href="styles.css?v=31">
 </head>
 <body>
 
@@ -65,6 +65,13 @@
   </symbol>
   <symbol id="ico-mail" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
     <rect x="2.6" y="4.8" width="18.8" height="14.4" rx="2.2"/><path d="m3.4 6.6 8.6 6 8.6-6"/>
+  </symbol>
+  <symbol id="ico-py" viewBox="0 0 20 11">
+    <rect width="20" height="11" fill="#FFFFFF"/>
+    <rect width="20" height="3.667" fill="#D52B1E"/>
+    <rect y="7.333" width="20" height="3.667" fill="#0038A8"/>
+    <circle cx="10" cy="5.5" r="1.75" fill="#FFFFFF" stroke="#1E7B3C" stroke-width="0.45"/>
+    <polygon points="10.000,4.650 10.212,5.209 10.808,5.237 10.342,5.611 10.500,6.188 10.000,5.860 9.500,6.188 9.658,5.611 9.192,5.237 9.788,5.209" fill="#F9D616"/>
   </symbol>
 </svg>
 
@@ -103,6 +110,7 @@
   <div class="hero__scrim"></div>
 
   <div class="wrap hero__inner">
+    <span class="hero__flag" aria-hidden="true"><svg viewBox="0 0 20 11"><use href="#ico-py"></use></svg></span>
     <p class="eyebrow">Gestión de residuos industriales · Paraguay</p>
     <h1 class="hero__title">Transformamos residuos en nueva materia prima.</h1>
     <p class="hero__lede">
@@ -816,6 +824,6 @@
 }
 </script>
 
-<script src="main.js?v=30" defer></script>
+<script src="main.js?v=31" defer></script>
 </body>
 </html>
