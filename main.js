@@ -18,6 +18,76 @@
     window.addEventListener('scroll', onScroll, { passive: true });
   }
 
+  /* ---- scrollspy ----
+     Marks the nav link whose section the reader is in. Nav links cover six of
+     the page's thirteen sections, so the active link is the last target the
+     reader has passed rather than "the section intersecting the viewport" —
+     that keeps a link lit inside an untargeted section (beneficios, casos,
+     testimonios...) instead of blanking out between targets. */
+  var spy = [];
+
+  Array.prototype.forEach.call(
+    document.querySelectorAll('#navmenu a[href^="#"]:not(.btn)'),
+    function (link) {
+      var section = document.getElementById(link.getAttribute('href').slice(1));
+      if (section) spy.push({ link: link, section: section });
+    }
+  );
+
+  // The menu is ordered to match the body, but the probe below walks the list
+  // in order and takes the last match, so a menu that drifts out of document
+  // order would silently elect the wrong link. Sorting makes that impossible.
+  spy.sort(function (a, b) {
+    var order = a.section.compareDocumentPosition(b.section);
+    return (order & Node.DOCUMENT_POSITION_FOLLOWING) ? -1 : 1;
+  });
+
+  if (spy.length) {
+    var lastActive = -1;
+    var queued = false;
+
+    var paint = function () {
+      queued = false;
+
+      var top = window.scrollY || document.documentElement.scrollTop;
+      var scrollable = document.documentElement.scrollHeight - window.innerHeight;
+
+      // the probe line sits just below the nav pill, where a section visually
+      // "arrives"; measured rather than hard-coded so the condensed bar, a
+      // wrapped logo or a zoomed page all stay in step
+      var probe = (nav ? nav.getBoundingClientRect().height : 0) + 24;
+      var index = -1;
+
+      for (var i = 0; i < spy.length; i++) {
+        if (spy[i].section.getBoundingClientRect().top <= probe) index = i;
+      }
+
+      // the last target is followed by two more sections, so it can never reach
+      // the probe on its own — hitting the end of the document elects it
+      if (scrollable > 0 && top >= scrollable - 2) index = spy.length - 1;
+
+      if (index === lastActive) return;
+      lastActive = index;
+
+      spy.forEach(function (entry, n) {
+        var on = n === index;
+        entry.link.classList.toggle('is-active', on);
+        if (on) entry.link.setAttribute('aria-current', 'location');
+        else entry.link.removeAttribute('aria-current');
+      });
+    };
+
+    var request = function () {
+      if (queued) return;
+      queued = true;
+      window.requestAnimationFrame(paint);
+    };
+
+    paint();
+    window.addEventListener('scroll', request, { passive: true });
+    window.addEventListener('resize', request);
+  }
+
   /* ---- nav: mobile drawer ---- */
   var toggle = document.getElementById('navtoggle');
   var menu = document.getElementById('navmenu');
@@ -121,7 +191,7 @@
      end of each cycle. Clone cards until the half is wide enough. screen.width
      is used as well as innerWidth so maximising the window cannot reintroduce it. */
   var target = Math.max(window.innerWidth, screen.width || 0);
-  document.querySelectorAll('.techloop__track, .quoteloop__track').forEach(function (track) {
+  document.querySelectorAll('.quoteloop__track').forEach(function (track) {
     var halves = track.children;
     if (halves.length < 2) return;
     var unique = Array.prototype.slice.call(halves[0].children);

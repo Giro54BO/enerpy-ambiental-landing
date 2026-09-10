@@ -6,3 +6,6 @@ Context/
 
 # Source assets (originals live with the agency; the web-ready copies are in img/)
 Assets/
+
+# Local preview helper (agent tooling, not part of the site)
+.claude/

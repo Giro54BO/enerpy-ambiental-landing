@@ -30,7 +30,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
 <script>document.documentElement.classList.add('js')</script>
-<link rel="stylesheet" href="styles.css?v=32">
+<link rel="stylesheet" href="styles.css?v=50">
 </head>
 <body>
 
@@ -85,8 +85,8 @@
     </a>
 
     <nav class="nav__links" id="navmenu" aria-label="Navegación principal">
-      <a href="#soluciones">Soluciones</a>
       <a href="#proceso">Proceso</a>
+      <a href="#soluciones">Soluciones</a>
       <a href="#rmo">Tecnología RMO®</a>
       <a href="#residuos">Residuos</a>
       <a href="#nosotros">Nosotros</a>
@@ -110,8 +110,10 @@
   <div class="hero__scrim"></div>
 
   <div class="wrap hero__inner">
-    <span class="hero__flag" aria-hidden="true"><svg viewBox="0 0 20 11"><use href="#ico-py"></use></svg></span>
-    <p class="eyebrow">Gestión de residuos industriales · Paraguay</p>
+    <div class="hero__tag">
+      <span class="hero__flag" aria-hidden="true"><svg viewBox="0 0 20 11" preserveAspectRatio="xMidYMid slice"><use href="#ico-py"></use></svg></span>
+      <p class="eyebrow">Gestión de residuos industriales · Paraguay</p>
+    </div>
     <h1 class="hero__title">Transformamos residuos en nueva materia prima.</h1>
     <p class="hero__lede">
       Convertimos residuos en nuevas materias primas mediante una tecnología patentada -única en Paraguay-, trazable y sin emisiones contaminantes, impulsando una industria nacional más circular, competitiva y sostenible.
@@ -202,23 +204,35 @@
     <div class="problema__head reveal">
       <div class="sec__head">
         <p class="eyebrow eyebrow--dark">El problema</p>
-        <h2 class="h2">Retirar un residuo no significa garantizar su destino final.</h2>
+        <h2 class="h2">Demostrar qué ocurre con cada residuo.</h2>
       </div>
-      <p class="lede">Una gestión responsable también implica conocer cómo será tratado, cuál será su destino y qué documentación respalda el proceso. Cuando esa trazabilidad no existe, aumentan la incertidumbre y los riesgos ambientales, operativos y reputacionales para la organización.</p>
+      <p class="lede">La normativa paraguaya establece responsabilidades para quienes generan residuos. Las organizaciones deben asegurar un almacenamiento adecuado y mantener información sobre su gestión, tratamiento y destino final.</p>
     </div>
 
     <ul class="psteps reveal">
       <li class="pstep">
-        <img src="img/problema/paso-1.webp" alt="Residuos industriales acumulados a la espera de una salida adecuada" width="300" height="300" loading="lazy" decoding="async">
+        <span class="pstep__n">1</span>
+        <span class="pstep__img">
+          <img src="img/problema/acumular.webp" alt="Ilustración de residuos peligrosos acumulados: bidones con símbolo de riesgo biológico, un notebook y árboles secos" width="318" height="200" loading="lazy" decoding="async">
+        </span>
+        <p class="pstep__t">Acumular</p>
+        <p class="pstep__d">Ocupa espacio y mantiene riesgos ambientales o sanitarios dentro del entorno productivo.</p>
       </li>
       <li class="pstep">
-        <img src="img/problema/paso-2.webp" alt="Técnico evaluando y documentando el residuo" width="300" height="300" loading="lazy" decoding="async">
+        <span class="pstep__n">2</span>
+        <span class="pstep__img">
+          <img src="img/problema/quemar.webp" alt="Ilustración de neumáticos ardiendo, generando una densa columna de humo negro" width="300" height="200" loading="lazy" decoding="async">
+        </span>
+        <p class="pstep__t">Quemar</p>
+        <p class="pstep__d">Destruye materiales aprovechables y puede generar nuevas emisiones.</p>
       </li>
       <li class="pstep">
-        <img src="img/problema/paso-3.webp" alt="Traslado del residuo a una planta de tratamiento" width="300" height="300" loading="lazy" decoding="async">
-      </li>
-      <li class="pstep">
-        <img src="img/problema/paso-4.webp" alt="Materiales y combustibles recuperados del proceso" width="300" height="306" loading="lazy" decoding="async">
+        <span class="pstep__n">3</span>
+        <span class="pstep__img">
+          <img src="img/problema/enterrar.webp" alt="Ilustración de una topadora enterrando residuos en un pozo o vertedero" width="300" height="200" loading="lazy" decoding="async">
+        </span>
+        <p class="pstep__t">Enterrar</p>
+        <p class="pstep__d">Traslada el problema y elimina la posibilidad de recuperar materia prima.</p>
       </li>
     </ul>
   </div>
@@ -239,7 +253,7 @@
             <span class="step__n">01</span>
             <span class="step__tx">
               <span class="step__t">Evaluamos</span>
-              <span class="step__d">Analizamos composición, volumen y condiciones.</span>
+              <span class="step__d">Identificamos el tipo de residuo, su composición, volumen y condiciones.</span>
             </span>
           </button>
         </li>
@@ -247,8 +261,8 @@
           <button class="step" data-step="1">
             <span class="step__n">02</span>
             <span class="step__tx">
-              <span class="step__t">Transformamos</span>
-              <span class="step__d">Aplicamos tecnología RMO® patentada, sin quema ni emisiones contaminantes.</span>
+              <span class="step__t">Aplicamos</span>
+              <span class="step__d">Definimos y ejecutamos el tratamiento adecuado para cada material.</span>
             </span>
           </button>
         </li>
@@ -256,8 +270,8 @@
           <button class="step" data-step="2">
             <span class="step__n">03</span>
             <span class="step__tx">
-              <span class="step__t">Valorizamos</span>
-              <span class="step__d">Recuperamos materias primas secundarias aprovechables.</span>
+              <span class="step__t">Transformamos</span>
+              <span class="step__d">Procesamos residuos complejos mediante tecnología especializada.</span>
             </span>
           </button>
         </li>
@@ -265,60 +279,55 @@
           <button class="step" data-step="3">
             <span class="step__n">04</span>
             <span class="step__tx">
+              <span class="step__t">Valorizamos</span>
+              <span class="step__d">Recuperamos materiales que pueden reincorporarse como materia prima.</span>
+            </span>
+          </button>
+        </li>
+        <li>
+          <button class="step" data-step="4">
+            <span class="step__n">05</span>
+            <span class="step__tx">
+              <span class="step__t">Aseguramos la trazabilidad</span>
+              <span class="step__d">Registramos el recorrido del residuo desde su recepción hasta el tratamiento y destino final.</span>
+            </span>
+          </button>
+        </li>
+        <li>
+          <button class="step" data-step="5">
+            <span class="step__n">06</span>
+            <span class="step__tx">
               <span class="step__t">Documentamos</span>
-              <span class="step__d">Entregamos trazabilidad y respaldo del proceso.</span>
+              <span class="step__d">Entregamos certificados y respaldo documental para auditorías, fiscalizaciones y controles internos.</span>
             </span>
           </button>
         </li>
       </ol>
 
       <figure class="steps__media">
-        <span class="steps__count"><b id="stepnow">1</b> / 4</span>
+        <span class="steps__count"><b id="stepnow">1</b> / 6</span>
         <img class="steps__img is-on" data-img="0" src="img/diagnostico-tecnico.webp" alt="Técnico evaluando residuos sobre una cinta transportadora" width="720" height="481" loading="lazy" decoding="async">
         <img class="steps__img" data-img="1" src="img/tecnologia-rmo.webp" alt="Operario trabajando en el reactor RMO® durante el tratamiento" width="720" height="480" loading="lazy" decoding="async">
-        <img class="steps__img" data-img="2" src="img/planta-rmo.webp" alt="Planta con tecnología RMO® de Enerpy Ambiental" width="1536" height="1024" loading="lazy" decoding="async">
-        <img class="steps__img" data-img="3" src="img/planta-procesos.webp" alt="Instalación industrial de procesos con columnas, tuberías y plataformas técnicas" width="1000" height="1778" loading="lazy" decoding="async">
+        <img class="steps__img" data-img="2" src="img/proceso-transformamos.jpg" alt="Operario supervisando un panel de control durante el tratamiento" width="1600" height="1360" loading="lazy" decoding="async">
+        <img class="steps__img" data-img="3" src="img/proceso-valorizamos.jpg" alt="Material recuperado listo para reincorporarse como materia prima" width="1600" height="1360" loading="lazy" decoding="async">
+        <img class="steps__img" data-img="4" src="img/gestion-final.webp" alt="Camión recolector retirando un contenedor de residuos" width="720" height="480" loading="lazy" decoding="async">
+        <img class="steps__img" data-img="5" src="img/proceso-documentamos.jpg" alt="Encargado registrando una inspección en una planilla de control" width="1600" height="1360" loading="lazy" decoding="async">
       </figure>
     </div>
   </div>
 </section>
 
 <!-- ============ 5. SOLUCIONES PRINCIPALES ============ -->
-<section class="sec sec--paper" id="soluciones">
-  <div class="wrap">
-    <div class="sec__head sec__head--center reveal">
-      <p class="eyebrow eyebrow--dark">RMO®</p>
-      <h2 class="h2">Una tecnología única en Paraguay que transforma residuos en materia prima.</h2>
-    </div>
-  </div>
+<section class="sec sec--paper sec--dotted" id="soluciones">
+  <div class="wrap solutions">
+    <figure class="solutions__art reveal">
+      <img src="img/rmo-blueprint.webp" alt="Esquema técnico del reactor RMO® con las corrientes de carbón, aceites pesados, aceites livianos, ácidos orgánicos y gas que produce" width="1800" height="1800" loading="lazy" decoding="async">
+    </figure>
 
-  <!-- same seamless-loop technique as the client marquee: two identical halves,
-       translated by half the track, paused on hover/focus, stopped under reduced motion -->
-  <div class="techloop" aria-label="Caracteristicas de la tecnologia RMO">
-    <div class="techloop__track">
-      <ul class="techloop__group">
-        <li class="tcard">
-          <span class="tcard__ico"><svg aria-hidden="true" focusable="false"><use href="#ico-patent"></use></svg></span>
-          <p class="tcard__t">Tecnología patentada.</p>
-        </li>
-        <li class="tcard">
-          <span class="tcard__ico"><svg aria-hidden="true" focusable="false"><use href="#ico-noburn"></use></svg></span>
-          <p class="tcard__t">No es incineración.</p>
-        </li>
-        <li class="tcard">
-          <span class="tcard__ico"><svg aria-hidden="true" focusable="false"><use href="#ico-clean"></use></svg></span>
-          <p class="tcard__t">No contamina aire ni agua.</p>
-        </li>
-        <li class="tcard">
-          <span class="tcard__ico"><svg aria-hidden="true" focusable="false"><use href="#ico-recycle"></use></svg></span>
-          <p class="tcard__t">Reconstruye materiales como materia prima secundaria.</p>
-        </li>
-        <li class="tcard">
-          <span class="tcard__ico"><svg aria-hidden="true" focusable="false"><use href="#ico-legal"></use></svg></span>
-          <p class="tcard__t">Cumple con las normativas paraguayas.</p>
-        </li>
-      </ul>
-      <ul class="techloop__group" aria-hidden="true">
+    <div class="solutions__body reveal">
+      <h2 class="h2">Una tecnología única en Paraguay que transforma residuos en materia prima.</h2>
+
+      <ul class="solutions__grid">
         <li class="tcard">
           <span class="tcard__ico"><svg aria-hidden="true" focusable="false"><use href="#ico-patent"></use></svg></span>
           <p class="tcard__t">Tecnología patentada.</p>
@@ -417,7 +426,7 @@
       </li>
       <li class="waste__i reveal">
         <span class="waste__media">
-          <img src="img/residuos/tintas.webp" alt="Envases de tintas y pinturas con remanentes" width="640" height="480" loading="lazy" decoding="async">
+          <img src="img/residuos/tintas.jpg" alt="Balde de pintura industrial con restos de pintura sintética" width="1280" height="960" loading="lazy" decoding="async">
         </span>
         <h3 class="waste__t">Tintas y pinturas</h3>
         <p class="waste__d">Remanentes y residuos de procesos de impresión, recubrimiento y pintado.</p>
@@ -494,6 +503,7 @@
           </div>
         </dl>
         <p class="case__d">Gestión final de residuos industriales con evaluación técnica previa y trazabilidad documental del proceso.</p>
+        <img class="case__photo" src="img/casos/arcor-planta.webp" alt="Vista aérea de la planta de Arcor en Paraguay" width="720" height="320" loading="lazy" decoding="async">
       </li>
       <li class="case reveal">
         <span class="case__logo"><img src="img/clientes/kingspan.webp" alt="Kingspan" height="42" loading="lazy" decoding="async"></span>
@@ -504,6 +514,7 @@
           </div>
         </dl>
         <p class="case__d">Gestión responsable de residuos, acompañada de control operativo y documentación del proceso.</p>
+        <img class="case__photo" src="img/casos/kingspan-planta.webp" alt="Fachada de la planta de Kingspan en Paraguay" width="720" height="320" loading="lazy" decoding="async">
       </li>
       <li class="case reveal">
         <span class="case__logo"><img src="img/clientes/unilever.webp" alt="Unilever" height="42" loading="lazy" decoding="async"></span>
@@ -514,6 +525,7 @@
           </div>
         </dl>
         <p class="case__d">Gestión de residuos mediante procesos documentados, con respaldo para la gestión ambiental y futuras auditorías.</p>
+        <img class="case__photo" src="img/casos/unilever-planta.webp" alt="Vista aérea de la planta de Unilever en Paraguay" width="720" height="320" loading="lazy" decoding="async">
       </li>
     </ul>
   </div>
@@ -535,29 +547,41 @@
         <li class="quote">
           <blockquote class="quote__t"><p>Lo que quedaba en los bidones al terminar cada lote requería muchísimo cuidado; hoy sigue un proceso controlado hasta su transformación.</p></blockquote>
           <footer class="quote__by">
-            <span class="quote__role">Encargada de Calidad y Medio Ambiente</span>
-            <span class="quote__ind">Industria agroquímica</span>
+            <img class="quote__avatar" src="img/testimonios/quality-agroquimica.jpg" alt="" width="44" height="44" loading="lazy" decoding="async">
+            <div class="quote__meta">
+              <span class="quote__role">Encargada de Calidad y Medio Ambiente</span>
+              <span class="quote__ind">Industria agroquímica</span>
+            </div>
           </footer>
         </li>
         <li class="quote">
           <blockquote class="quote__t"><p>Con lo que sale de la limpieza de silos y el movimiento de granos, hoy tenemos cada retiro documentado y todo en carpeta para una fiscalización.</p></blockquote>
           <footer class="quote__by">
-            <span class="quote__role">Gerente Administrativo</span>
-            <span class="quote__ind">Agroindustria</span>
+            <img class="quote__avatar" src="img/testimonios/admin-agroindustria.jpg" alt="" width="44" height="44" loading="lazy" decoding="async">
+            <div class="quote__meta">
+              <span class="quote__role">Gerente Administrativo</span>
+              <span class="quote__ind">Agroindustria</span>
+            </div>
           </footer>
         </li>
         <li class="quote">
           <blockquote class="quote__t"><p>Se nos juntaban aceite usado, filtros y neumáticos cada vez que entraban vehículos. Ahora los retiros tienen fecha y el taller se mantiene limpio y ordenado.</p></blockquote>
           <footer class="quote__by">
-            <span class="quote__role">Jefe de Taller</span>
-            <span class="quote__ind">Concesionaria automotriz</span>
+            <img class="quote__avatar" src="img/testimonios/taller-automotriz.jpg" alt="" width="44" height="44" loading="lazy" decoding="async">
+            <div class="quote__meta">
+              <span class="quote__role">Jefe de Taller</span>
+              <span class="quote__ind">Concesionaria automotriz</span>
+            </div>
           </footer>
         </li>
         <li class="quote">
           <blockquote class="quote__t"><p>Necesitábamos una salida segura para tintas vencidas, cartuchos y envases con restos. Hoy ese material se procesa y cada entrega queda respaldada con su certificado.</p></blockquote>
           <footer class="quote__by">
-            <span class="quote__role">Encargada Comercial</span>
-            <span class="quote__ind">Empresa de insumos para impresión</span>
+            <img class="quote__avatar" src="img/testimonios/comercial-impresion.jpg" alt="" width="44" height="44" loading="lazy" decoding="async">
+            <div class="quote__meta">
+              <span class="quote__role">Encargada Comercial</span>
+              <span class="quote__ind">Empresa de insumos para impresión</span>
+            </div>
           </footer>
         </li>
       </ul>
@@ -565,29 +589,41 @@
         <li class="quote">
           <blockquote class="quote__t"><p>Lo que quedaba en los bidones al terminar cada lote requería muchísimo cuidado; hoy sigue un proceso controlado hasta su transformación.</p></blockquote>
           <footer class="quote__by">
-            <span class="quote__role">Encargada de Calidad y Medio Ambiente</span>
-            <span class="quote__ind">Industria agroquímica</span>
+            <img class="quote__avatar" src="img/testimonios/quality-agroquimica.jpg" alt="" width="44" height="44" loading="lazy" decoding="async">
+            <div class="quote__meta">
+              <span class="quote__role">Encargada de Calidad y Medio Ambiente</span>
+              <span class="quote__ind">Industria agroquímica</span>
+            </div>
           </footer>
         </li>
         <li class="quote">
           <blockquote class="quote__t"><p>Con lo que sale de la limpieza de silos y el movimiento de granos, hoy tenemos cada retiro documentado y todo en carpeta para una fiscalización.</p></blockquote>
           <footer class="quote__by">
-            <span class="quote__role">Gerente Administrativo</span>
-            <span class="quote__ind">Agroindustria</span>
+            <img class="quote__avatar" src="img/testimonios/admin-agroindustria.jpg" alt="" width="44" height="44" loading="lazy" decoding="async">
+            <div class="quote__meta">
+              <span class="quote__role">Gerente Administrativo</span>
+              <span class="quote__ind">Agroindustria</span>
+            </div>
           </footer>
         </li>
         <li class="quote">
           <blockquote class="quote__t"><p>Se nos juntaban aceite usado, filtros y neumáticos cada vez que entraban vehículos. Ahora los retiros tienen fecha y el taller se mantiene limpio y ordenado.</p></blockquote>
           <footer class="quote__by">
-            <span class="quote__role">Jefe de Taller</span>
-            <span class="quote__ind">Concesionaria automotriz</span>
+            <img class="quote__avatar" src="img/testimonios/taller-automotriz.jpg" alt="" width="44" height="44" loading="lazy" decoding="async">
+            <div class="quote__meta">
+              <span class="quote__role">Jefe de Taller</span>
+              <span class="quote__ind">Concesionaria automotriz</span>
+            </div>
           </footer>
         </li>
         <li class="quote">
           <blockquote class="quote__t"><p>Necesitábamos una salida segura para tintas vencidas, cartuchos y envases con restos. Hoy ese material se procesa y cada entrega queda respaldada con su certificado.</p></blockquote>
           <footer class="quote__by">
-            <span class="quote__role">Encargada Comercial</span>
-            <span class="quote__ind">Empresa de insumos para impresión</span>
+            <img class="quote__avatar" src="img/testimonios/comercial-impresion.jpg" alt="" width="44" height="44" loading="lazy" decoding="async">
+            <div class="quote__meta">
+              <span class="quote__role">Encargada Comercial</span>
+              <span class="quote__ind">Empresa de insumos para impresión</span>
+            </div>
           </footer>
         </li>
       </ul>
@@ -824,6 +860,6 @@
 }
 </script>
 
-<script src="main.js?v=32" defer></script>
+<script src="main.js?v=39" defer></script>
 </body>
 </html>
