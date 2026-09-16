@@ -9,3 +9,6 @@ Assets/
 
 # Local preview helper (agent tooling, not part of the site)
 .claude/
+
+# Agent/design context, not part of the site (same rule as Context/ above)
+PRODUCT.md

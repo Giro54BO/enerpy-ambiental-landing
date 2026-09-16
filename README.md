@@ -34,13 +34,50 @@ shorthand, each token carries a paired `--type-*-ls` applied in a second declara
 .h2{ font:var(--type-h2); letter-spacing:var(--type-h2-ls); }
 ```
 
-One family throughout: **Archivo** (`--font-sans`), loaded at 300/400/500/600/700 plus
-400/500 italic. Root size is `--fs-root:16px`.
+One family throughout: **Archivo** (`--font-sans`), loaded at 300/400/500/700 plus 400
+italic. Root size is `--fs-root:16px`. Nothing outside `:root` sets a literal font size
+except the footer wordmark, which is a decorative watermark rather than text.
 
-Five tokens are defined but currently unused, because this page has no element that fits
-them — `--type-nav` (3.4rem, sized for a full-screen menu; the compact nav bar uses
-`--type-sm`), `--type-marquee` (the marquee holds logos, not text), `--type-stat`,
-`--type-italic`, and `--type-label-3xs`. They are left in place for future sections.
+### The scale
+
+Five text steps with committed ratios, plus fluid display sizes:
+
+| Token | Size | Role | Ratio to next |
+|---|---|---|---|
+| `--fs-lg` | 20px | subheads, card titles | 1.25 |
+| `--fs-body` | 16px | body copy, quotes, nav, links | 1.23 |
+| `--fs-sm` | 13px | short descriptions, fine print | 1.18 |
+| `--fs-caps` | 11px | uppercase micro-labels | — |
+
+This replaced a nine-step ramp (1.05 → 0.61rem) whose ratios ran as flat as 1.03: at
+15.2 / 14.7 / 13.8px, three different roles were rendering at what read as one size set
+slightly wrong. Body copy was also below the 16px legibility floor.
+
+### Display leading
+
+Archivo Light measures **0.723em** from the baseline to the accent of an accented
+lowercase (í ó ú á) and **0.182em** to the tail of a *g* — 0.905em of real ink. Any
+line-height below that makes stacked lines touch, and Spanish accents far more often than
+English. The previous `0.77` left 0.125em of overlap, clearly visible on *"Una tecnología
+única en Paraguay que transforma residuos en materia prima."* at five lines.
+
+- `--lh-hero: .95` — 0.045em of clearance
+- `--lh-h2: 1` — 0.095em; section headings reach five lines
+
+Measured across the nine headings that currently wrap, the worst clearance is +4.9px.
+
+### Fallback metrics
+
+`@font-face` registers a metric-matched **"Archivo Fallback"** over `local("Arial")` in
+four weight-scoped faces, because Archivo's width mismatch against Arial is not constant:
+setting the same string at 100px, Archivo measures 2552.7px at weight 300 against Arial's
+2640.5 (Arial has no 300 and substitutes 400), 2598.2 vs 2640.5 at 400, 2643.7 vs 2640.5
+at 500, and 2787.5 vs 2828.5 at 700.
+
+A single `size-adjust` tuned for body weight is not enough — it left the 300-weight RMO
+heading wrapping to six lines in the fallback and five in Archivo, a 67px jump during the
+swap. With the four faces, reflow across all 53 text blocks measures **0px**, against 67px
+with plain Arial.
 
 ## Palette
 
@@ -147,6 +184,21 @@ delete the disclaimer paragraph.
   still missing — the client raised this herself. Deliberately **no `Review` structured data**
   until then: Google requires a named reviewer, and marking up unattributed quotes as reviews
   risks a fabricated-social-proof penalty.
+
+### Case figures (all six)
+
+Every `.case__n` still carries `.is-pending`. The six tonnage figures — Arcor +200,
+Kingspan +130, Unilever +80, BASF Paraguaya +80, Bebidas del Paraguay +20, Yguazú
+Cementos +18 — are placeholders for layout and are **not confirmed data**. Replace them
+with the client's real numbers and strip `.is-pending` before publishing.
+
+Logo and photograph authorization is outstanding for all six companies, as it is for the
+marquee. The three plant photographs added for BASF, Bebidas del Paraguay and Yguazú
+Cementos were supplied by the client; confirm the usage rights carry to this page.
+
+The Yguazú Cementos logo was supplied at 154×42px, which is exactly its rendered size, so
+it resolves at 1× and looks soft on high-density screens. A source at 2× (≈308×84) or an
+SVG would fix it.
 
 ## Content rules honored
 

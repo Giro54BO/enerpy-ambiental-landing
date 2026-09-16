@@ -19,55 +19,64 @@
   --line-dark:rgba(191,204,207,.18);
   --line-light:rgba(1,53,64,.14);
 
-  /* ---- Typographic scale ---- */
-  --fs-hero:clamp(2.9rem,8.2vw,7rem);      /* Titular del hero y del pie */
-  --fs-display:clamp(2.6rem,7.4vw,6.2rem); /* Titular grande del pie */
+  /* ---- Typographic scale ----
+     Five text steps, ratios 1.25 / 1.23 / 1.18. The previous ramp ran nine steps
+     from 1.05rem to 0.61rem with ratios as flat as 1.03, which is too little
+     separation to read as hierarchy: 15.2 / 14.7 / 13.8px all looked like the
+     same size set slightly wrong. Fewer sizes, real gaps, nothing under 11px. */
+
+  /* Display — fluid, marketing headlines */
+  --fs-hero:clamp(2.9rem,8.2vw,7rem);      /* Titular del hero */
+  --fs-display:clamp(2.6rem,7.4vw,6.2rem); /* Titular del pie */
   --fs-h2:clamp(2.1rem,5.4vw,4.2rem);      /* Titulares de seccion */
   --fs-h2-sm:clamp(1.9rem,4.2vw,3.2rem);   /* Titular de seccion reducido */
-  --fs-nav:clamp(1.8rem,5.5vw,3.4rem);     /* Enlaces del menu a pantalla completa */
-  --fs-marquee:clamp(1.5rem,3.6vw,2.6rem); /* Marquesina */
-  --fs-lead:clamp(1rem,1.9vw,1.35rem);     /* Frase de cierre del pie */
-  --fs-stat:2rem;             /* Cifras destacadas */
-  --fs-lg:1.05rem;            /* Texto destacado */
-  --fs-md:1rem;               /* Titulos de tarjeta */
-  --fs-body:0.95rem;          /* Texto corrido */
-  --fs-sm:0.92rem;            /* Texto secundario */
-  --fs-xs:0.86rem;            /* Notas y descripciones */
-  --fs-2xs:0.76rem;           /* Texto auxiliar */
-  --fs-3xs:0.72rem;           /* Etiquetas */
-  --fs-4xs:0.67rem;           /* Versalitas de interfaz */
-  --fs-5xs:0.61rem;           /* Etiquetas minimas */
+  --fs-lead:clamp(1.0625rem,1.9vw,1.375rem); /* Entradilla: nunca menor que el cuerpo */
+  --fs-stat:2rem;             /* 32px · cifras destacadas */
+  --fs-stat-sm:1.5rem;        /* 24px · cifras secundarias y numeros de paso (1.33) */
+
+  /* Texto — fijo en rem, respeta el zoom del navegador */
+  --fs-lg:1.25rem;            /* 20px · subtitulos y titulos de tarjeta */
+  --fs-body:1rem;             /* 16px · texto corrido (minimo legible) */
+  --fs-sm:0.8125rem;          /* 13px · descripciones breves y letra chica */
+  --fs-caps:0.6875rem;        /* 11px · versalitas y etiquetas */
   --fs-root:16px;             /* Base del documento */
 
   /* Familia unica */
-  --font-sans:"Archivo","Helvetica Neue",Arial,sans-serif;
+  --font-sans:"Archivo","Archivo Fallback","Helvetica Neue",Arial,sans-serif;
+
+  /* Interlineados de titular.
+     Archivo en 300 mide 0.723em desde la linea base hasta el acento de una
+     minuscula acentuada (i o u a) y 0.182em hasta la cola de una g: 0.905em de
+     tinta real. Cualquier interlineado por debajo de eso hace que las lineas se
+     toquen, y el castellano acentua mucho mas que el ingles. 0.77 daba 0.125em
+     de solape, visible en "Una tecnologia unica en Paraguay" a cinco lineas. */
+  --lh-hero:.95;              /* 0.045em de aire */
+  --lh-h2:1;                  /* 0.095em · los h2 llegan a cinco lineas */
 
   /* Tipografia: peso / line-height / font-family. letter-spacing no forma parte
      del atajo `font`, asi que viaja en su propia variable `-ls`. */
-  --type-hero:300 var(--fs-hero)/.77 var(--font-sans);       --type-hero-ls:-.04em;
-  --type-display:300 var(--fs-display)/.77 var(--font-sans); --type-display-ls:-.04em;
-  --type-h2:300 var(--fs-h2)/.78 var(--font-sans);           --type-h2-ls:-.015em;
-  --type-h2-sm:300 var(--fs-h2-sm)/.98 var(--font-sans);     --type-h2-sm-ls:-.015em;
-  --type-nav:500 var(--fs-nav)/1.5 var(--font-sans);         --type-nav-ls:normal;
-  --type-marquee:400 var(--fs-marquee)/1.6 var(--font-sans); --type-marquee-ls:normal;
-  --type-stat:700 var(--fs-stat)/1 var(--font-sans);         --type-stat-ls:normal;
-  --type-lead:400 var(--fs-lead)/1.35 var(--font-sans);      --type-lead-ls:normal;
+  --type-hero:300 var(--fs-hero)/var(--lh-hero) var(--font-sans);       --type-hero-ls:-.035em;
+  --type-display:300 var(--fs-display)/var(--lh-hero) var(--font-sans); --type-display-ls:-.035em;
+  --type-h2:300 var(--fs-h2)/var(--lh-h2) var(--font-sans);             --type-h2-ls:-.02em;
+  --type-h2-sm:300 var(--fs-h2-sm)/var(--lh-h2) var(--font-sans);       --type-h2-sm-ls:-.02em;
+  --type-stat:700 var(--fs-stat)/1 var(--font-sans);                    --type-stat-ls:-.01em;
+  --type-stat-sm:700 var(--fs-stat-sm)/1 var(--font-sans);               --type-stat-sm-ls:-.01em;
+  --type-lead:400 var(--fs-lead)/1.45 var(--font-sans);                 --type-lead-ls:normal;
 
-  --type-card:500 var(--fs-lg)/1.28 var(--font-sans);           --type-card-ls:normal;
-  --type-body:400 var(--fs-body)/1.62 var(--font-sans);         --type-body-ls:normal;
-  --type-sm:400 var(--fs-sm)/1.6 var(--font-sans);              --type-sm-ls:normal;
-  --type-xs:400 var(--fs-xs)/1.55 var(--font-sans);             --type-xs-ls:normal;
-  --type-2xs:400 var(--fs-2xs)/1.5 var(--font-sans);            --type-2xs-ls:normal;
-  --type-italic:italic 400 var(--fs-sm)/1.6 var(--font-sans);   --type-italic-ls:normal;
-  --type-btn:500 var(--fs-xs)/1 var(--font-sans);               --type-btn-ls:.09em;
-  --type-address:400 var(--fs-sm)/1.7 var(--font-sans);         --type-address-ls:normal;
+  --type-card:500 var(--fs-lg)/1.3 var(--font-sans);                    --type-card-ls:-.005em;
+  --type-body:400 var(--fs-body)/1.6 var(--font-sans);                  --type-body-ls:normal;
+  --type-sm:400 var(--fs-body)/1.5 var(--font-sans);                    --type-sm-ls:normal;
+  --type-xs:400 var(--fs-sm)/1.5 var(--font-sans);                      --type-xs-ls:normal;
+  --type-2xs:400 var(--fs-sm)/1.45 var(--font-sans);                    --type-2xs-ls:normal;
+  --type-italic:italic 400 var(--fs-body)/1.6 var(--font-sans);         --type-italic-ls:normal;
+  --type-btn:500 var(--fs-sm)/1 var(--font-sans);                       --type-btn-ls:.09em;
+  --type-address:400 var(--fs-body)/1.65 var(--font-sans);              --type-address-ls:normal;
 
-  /* Versalitas */
-  --type-label:600 var(--fs-xs)/1 var(--font-sans);             --type-label-ls:.11em;
-  --type-label-sm:700 var(--fs-4xs)/1.4 var(--font-sans);       --type-label-sm-ls:.14em;
-  --type-label-3xs:700 var(--fs-3xs)/1 var(--font-sans);        --type-label-3xs-ls:.14em;
-  --type-label-xs:700 var(--fs-5xs)/1 var(--font-sans);         --type-label-xs-ls:.12em;
-  --type-rail:700 var(--fs-4xs)/1 var(--font-sans);             --type-rail-ls:.22em;
+  /* Versalitas. Las mayusculas se tocan al espaciado normal: 9-14% de tracking. */
+  --type-label:700 var(--fs-sm)/1 var(--font-sans);                     --type-label-ls:.11em;
+  --type-label-sm:700 var(--fs-caps)/1.4 var(--font-sans);              --type-label-sm-ls:.14em;
+  --type-label-xs:700 var(--fs-caps)/1 var(--font-sans);                --type-label-xs-ls:.12em;
+  --type-rail:700 var(--fs-caps)/1 var(--font-sans);                    --type-rail-ls:.22em;
 
   /* layout */
   --wrap:1200px;
@@ -75,6 +84,60 @@
   --r:18px;
   --r-lg:28px;
   --sec-y:clamp(72px,10vw,140px);
+}
+
+/* Metric-matched fallback for the FOUT.
+   Archivo loads from Google Fonts with font-display:swap, so the first paint is
+   Arial and then swaps. The width mismatch is not constant across the ramp,
+   which is why this is four faces rather than one: setting the same string at
+   100px, Archivo measures 2552.7px at weight 300 against Arial's 2640.5 (Arial
+   has no 300 and substitutes 400), 2598.2 vs 2640.5 at 400, 2643.7 vs 2640.5 at
+   500 and 2787.5 vs 2828.5 at 700. A single size-adjust tuned for body weight
+   left the 300-weight h2 wrapping to six lines in the fallback and five in
+   Archivo — a 67px jump on the tallest heading on the page.
+
+   The ascent/descent overrides carry Archivo's own .88/.21 metrics, divided by
+   each size-adjust so the line box matches. They only bite where line-height is
+   `normal`, which is nowhere here, but they keep the face correct if that
+   changes. */
+@font-face{
+  font-family:"Archivo Fallback";
+  font-weight:300;                     /* titulares */
+  src:local("Arial"),local("Helvetica Neue"),local("Liberation Sans");
+  size-adjust:96.7%;
+  ascent-override:91.0%;
+  descent-override:21.7%;
+  line-gap-override:0%;
+}
+
+@font-face{
+  font-family:"Archivo Fallback";
+  font-weight:400;                     /* texto corrido */
+  src:local("Arial"),local("Helvetica Neue"),local("Liberation Sans");
+  size-adjust:98.4%;
+  ascent-override:89.4%;
+  descent-override:21.3%;
+  line-gap-override:0%;
+}
+
+@font-face{
+  font-family:"Archivo Fallback";
+  font-weight:500;                     /* titulos de tarjeta */
+  src:local("Arial"),local("Helvetica Neue"),local("Liberation Sans");
+  size-adjust:100.1%;
+  ascent-override:87.9%;
+  descent-override:21.0%;
+  line-gap-override:0%;
+}
+
+@font-face{
+  font-family:"Archivo Fallback";
+  font-weight:700;                     /* cifras y versalitas */
+  src:local("Arial"),local("Helvetica Neue"),local("Liberation Sans");
+  size-adjust:98.6%;
+  ascent-override:89.2%;
+  descent-override:21.3%;
+  line-gap-override:0%;
 }
 
 *,*::before,*::after{box-sizing:border-box}
@@ -89,7 +152,17 @@ body{
   font:var(--type-body);letter-spacing:var(--type-body-ls);
   overflow-x:hidden;
   -webkit-font-smoothing:antialiased;
+  font-kerning:normal;
+  font-optical-sizing:auto;
 }
+
+/* Titulares: reparte las lineas en vez de dejar una palabra huerfana abajo.
+   `pretty` en prosa larga hace lo mismo con la ultima linea del parrafo. */
+h1,h2,h3,.h2,.hero__title{text-wrap:balance}
+/* El peso 900 no se carga: `bolder` del navegador obligaba a sintetizar una
+   negrita falsa (contorno engrosado) en el contador de pasos. */
+b,strong{font-weight:700}
+p,li,dd,figcaption,blockquote{text-wrap:pretty}
 
 img,svg,picture{display:block;max-width:100%}
 img{height:auto}
@@ -309,14 +382,14 @@ section[id]{scroll-margin-top:122px}
    crops its sides to fill the circle rather than letterboxing it — the emblem
    is centred in the source, so it survives the crop.
    The diameter is written out from the eyebrow chip's own metrics — its line
-   box (--fs-4xs at the 1.4 of --type-label-sm) plus its 7px of vertical
+   box (--fs-caps at the 1.4 of --type-label-sm) plus its 7px of vertical
    padding — so the circle keeps matching the chip's height rather than being
    a number that silently drifts from it. It cannot be derived from the chip at
    layout time: sizing the circle off its neighbour's height while the flag
    itself has no intrinsic width makes the row's height depend on its own
    result, and the SVG falls back to its 300px default. */
 .hero__flag{
-  --flag-size:calc(var(--fs-4xs) * 1.4 + 14px);
+  --flag-size:calc(var(--fs-caps) * 1.4 + 14px);
   flex:none;width:var(--flag-size);height:var(--flag-size);
   line-height:0;border-radius:50%;overflow:hidden;
   box-shadow:0 0 0 1px rgba(255,255,255,.4);
@@ -381,7 +454,7 @@ section[id]{scroll-margin-top:122px}
   /* minmax(0,1fr) rather than 1fr: the widest figure (+8.000.000) has an
      intrinsic width that otherwise forces its column wider than the others */
   .kpis__list{grid-template-columns:repeat(2,minmax(0,1fr));gap:28px 16px}
-  .kpi__n{font-size:1.55rem}
+  .kpi__n{font-size:var(--fs-stat-sm)}
   .kpi:last-child{grid-column:1/-1}
 }
 
@@ -399,8 +472,11 @@ section[id]{scroll-margin-top:122px}
   mask-image:linear-gradient(90deg,transparent,#000 9%,#000 91%,transparent);
 }
 .marquee__track{display:flex;width:max-content;animation:slide 46s linear infinite}
-.marquee:hover .marquee__track,
-.marquee:focus-within .marquee__track{animation-play-state:paused}
+/* No hover pause here. The band is 100% wide, so the pointer sits inside it for
+   most of the time this section is on screen, and :hover is not recomputed until
+   the pointer actually moves — a trackpad scroll that leaves the cursor in the
+   band froze the logos until the reader jiggled the mouse. There is nothing to
+   read in a row of logos, so the pause bought nothing and cost that. */
 .marquee__group{display:flex;gap:16px;padding-right:16px}
 
 .logo{
@@ -698,7 +774,7 @@ section[id]{scroll-margin-top:122px}
    above to hold it. */
 .foot__cols a[href^="mailto"] span{
   white-space:nowrap;overflow-wrap:normal;
-  font-size:var(--fs-xs);
+  font-size:var(--fs-sm);
 }
 .foot__cols a:hover{color:var(--lime)}
 
@@ -712,6 +788,9 @@ section[id]{scroll-margin-top:122px}
 
 .foot__mark{
   font:var(--type-display);letter-spacing:var(--type-display-ls);
+  /* Deliberadamente fuera de la escala: no es texto, es una marca de agua
+     tipografica de una sola linea en mayusculas y sin trazo descendente, asi
+     que .78 de interlineado no puede solaparse. */
   font-size:clamp(4rem,19vw,17rem);line-height:.78;
   color:transparent;
   -webkit-text-stroke:1px rgba(191,204,207,.22);
@@ -785,7 +864,10 @@ section[id]{scroll-margin-top:122px}
   font:var(--type-label-sm);letter-spacing:var(--type-label-sm-ls);
   text-transform:uppercase;color:var(--stormcloud);
 }
-.case__n{margin:0;font:var(--type-stat);letter-spacing:var(--type-stat-ls);color:var(--softwood)}
+.case__n{
+  margin:0;font:var(--type-stat);letter-spacing:var(--type-stat-ls);
+  color:var(--softwood);font-variant-numeric:tabular-nums;
+}
 
 /* an unfilled figure must never read as data */
 .is-pending{
@@ -931,7 +1013,16 @@ section[id]{scroll-margin-top:122px}
   mask-image:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent);
 }
 .quoteloop__track{display:flex;width:max-content;animation:slide 86s linear infinite}
-.quoteloop:hover .quoteloop__track,
+/* No hover pause. The track is transform-animated on the compositor, and the
+   browser only re-runs hit-testing for :hover on pointer events — so cards slide
+   out from under a stationary pointer with nothing fired, and :hover latches at
+   whatever it last resolved. Latched on, the carousel stopped and stayed stopped
+   until the reader moved the mouse, which is what read as "the carousel is
+   broken". A pause that fires at random is worse than no pause.
+
+   :focus-within is kept: focus is event-driven and sticky, so it is reliable,
+   and it stops the track sliding away from a keyboard user who lands inside it.
+   The dependable stop for everyone else is prefers-reduced-motion, below. */
 .quoteloop:focus-within .quoteloop__track{animation-play-state:paused}
 .quoteloop__group{display:flex;gap:20px;margin:0;padding:0 20px 0 0;list-style:none}
 .quoteloop .quote{flex:none;width:min(380px,82vw)}
@@ -959,7 +1050,7 @@ section[id]{scroll-margin-top:122px}
   display:grid;place-items:center;flex:none;
   width:66px;height:66px;margin-bottom:32px;
   border-radius:50%;background:var(--lime);
-  font:600 1.5rem/1 var(--font-sans);color:var(--softwood);
+  font:var(--type-stat-sm);letter-spacing:var(--type-stat-sm-ls);color:var(--softwood);
 }
 .pstep__img{display:block;margin-bottom:26px}
 .pstep__img img{display:block;width:100%;height:180px;object-fit:contain}
