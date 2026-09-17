@@ -206,7 +206,112 @@
         });
       });
     }
+    buildDots(track, unique.length, halves[0].children.length);
   });
+
+  /* ---- carousel dots ----
+     A continuous marquee gives the reader no idea how much there is or that it
+     is advancing at all — it can look like a static row of cards, which is what
+     people reported. The dots answer both: how many testimonials exist, which
+     one is up, and (by moving on their own) that the thing is running.
+
+     They are real buttons, not decoration. Under reduced motion the track is not
+     animated and .quoteloop is overflow:hidden, so without them every quote past
+     the third was simply unreachable; there they scroll the strip instead. */
+  function buildDots(track, uniqueCount, perHalf) {
+    if (uniqueCount < 2) return;
+
+    var loop = track.parentElement;
+    var nav = document.createElement('div');
+    nav.className = 'quoteloop__dots';
+    nav.setAttribute('role', 'group');
+    nav.setAttribute('aria-label', 'Elegir testimonio');
+
+    var dots = [];
+    for (var i = 0; i < uniqueCount; i++) {
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'quoteloop__dot';
+      b.setAttribute('aria-label', 'Testimonio ' + (i + 1) + ' de ' + uniqueCount);
+      b.dataset.i = String(i);
+      nav.appendChild(b);
+      dots.push(b);
+    }
+    loop.parentElement.insertBefore(nav, loop.nextSibling);
+
+    // the CSS animation is the source of truth while it exists; seeking it by
+    // currentTime is exact, where reading back the transform would not be
+    function running() {
+      var a = track.getAnimations ? track.getAnimations() : [];
+      return a.length ? a[0] : null;
+    }
+    function ms(v) { return (v && typeof v === 'object') ? v.value : v; }
+
+    var active = -1;
+    function paint(i) {
+      if (i === active) return;
+      active = i;
+      dots.forEach(function (d, n) {
+        d.classList.toggle('is-on', n === i);
+        if (n === i) d.setAttribute('aria-current', 'true');
+        else d.removeAttribute('aria-current');
+      });
+    }
+
+    function read() {
+      var a = running();
+      if (a && a.effect) {
+        var dur = ms(a.effect.getTiming().duration);
+        var now = ms(a.currentTime) || 0;
+        if (!dur) return;
+        // one cycle scrolls exactly one half, so progress maps to card index
+        var p = (now % dur) / dur;
+        paint(Math.floor(p * perHalf) % uniqueCount);
+      } else if (loop.scrollWidth > loop.clientWidth) {
+        var card = track.children[0].children[0];
+        var step = card.getBoundingClientRect().width + 20;
+        paint(Math.round(loop.scrollLeft / step) % uniqueCount);
+      }
+    }
+
+    nav.addEventListener('click', function (e) {
+      var b = e.target.closest('.quoteloop__dot');
+      if (!b) return;
+      var i = Number(b.dataset.i);
+      var a = running();
+      if (a && a.effect) {
+        a.currentTime = (i / perHalf) * ms(a.effect.getTiming().duration);
+      } else {
+        var card = track.children[0].children[i];
+        if (card) {
+          // Geometry, not offsetLeft: .quoteloop is not positioned, so offsetLeft
+          // resolves against <body> and would be wrong the moment anything above
+          // it gains a left offset. And behaviour is 'auto' on purpose —
+          // scroll-snap-type:x mandatory cancels a smooth programmatic scroll
+          // partway and snaps straight back to where it started.
+          var delta = card.getBoundingClientRect().left - loop.getBoundingClientRect().left;
+          loop.scrollTo({ left: loop.scrollLeft + delta, behavior: 'auto' });
+        }
+      }
+      read();
+    });
+
+    loop.addEventListener('scroll', read, { passive: true });
+
+    // only tick while the section is actually on screen
+    var timer = null;
+    var start = function () { if (timer === null) timer = setInterval(read, 250); };
+    var stop = function () { if (timer !== null) { clearInterval(timer); timer = null; } };
+
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function (entries) {
+        entries.forEach(function (en) { en.isIntersecting ? start() : stop(); });
+      }, { threshold: 0 }).observe(loop);
+    } else {
+      start();
+    }
+    read();
+  }
 
   /* ---- scroll reveal ---- */
   var revealables = document.querySelectorAll('.reveal');

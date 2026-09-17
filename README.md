@@ -243,6 +243,16 @@ a public repository and that material is internal. The web-ready images live in 
 - All motion — marquee, reveals, chips, stepper auto-advance — stops under
   `prefers-reduced-motion: reduce`
 - Content is never permanently hidden if JS fails: reveal animations are gated on a `js` class
+- The testimonial carousel carries dot controls: real `<button>`s, 24x24 targets,
+  labelled "Testimonio N de 4", and 3.27:1 against the ground when inactive so the
+  shape that identifies the control clears WCAG 1.4.11
+- Under `prefers-reduced-motion` the quote track is not animated, and `.quoteloop`
+  is `overflow:hidden` — so the strip becomes a scroll-snap container there and the
+  dots scroll it. Without that, every quote past the third was unreachable
+- The carousel has no hover pause. The track animates on the compositor and the
+  browser only re-runs `:hover` hit-testing on pointer events, so cards slid out
+  from under a stationary pointer with nothing fired and `:hover` latched on,
+  stopping the carousel until the reader moved the mouse
 
 ## Verified
 
