@@ -313,6 +313,168 @@
     read();
   }
 
+  /* ---- video de portada ---- */
+  /* autoplay is requested in the markup; this only handles the cases the markup
+     cannot: a browser that refuses to start it, and a reader who asked for less
+     motion. Both end with the poster showing and the button offering play, so
+     the section never sits on a blank rectangle. */
+  var video = document.getElementById('herovideo');
+  var vtoggle = document.getElementById('videotoggle');
+
+  if (video && vtoggle) {
+    var paintToggle = function () {
+      var paused = video.paused;
+      vtoggle.setAttribute('aria-label', paused ? 'Reproducir video' : 'Pausar video');
+      vtoggle.querySelector('use').setAttribute('href', paused ? '#ico-play' : '#ico-pause');
+    };
+
+    if (reduced) {
+      // autoplay already started before this ran, so stop it and rewind to the
+      // poster frame rather than freezing on an arbitrary one
+      video.autoplay = false;
+      video.pause();
+      try { video.currentTime = 0; } catch (e) {}
+    } else {
+      // Safari and most mobile browsers reject autoplay until they are satisfied
+      // the video is muted; the promise rejecting is the only way to find out
+      var attempt = video.play();
+      if (attempt && typeof attempt.catch === 'function') attempt.catch(function () {});
+    }
+
+    vtoggle.addEventListener('click', function () {
+      if (video.paused) video.play(); else video.pause();
+    });
+    video.addEventListener('play', paintToggle);
+    video.addEventListener('pause', paintToggle);
+    paintToggle();
+  }
+
+  /* ---- franja de captación ---- */
+  var leadform = document.getElementById('leadform');
+
+  if (leadform) {
+    var fName  = document.getElementById('lf-name');
+    var fPhone = document.getElementById('lf-phone');
+    var fCc    = document.getElementById('lf-cc');
+
+    // each country writes its own numbers differently, so the example follows
+    // the selection instead of showing a Paraguayan number to a Brazilian
+    var syncPlaceholder = function () {
+      var opt = fCc.options[fCc.selectedIndex];
+      if (opt) fPhone.placeholder = opt.dataset.ph || '';
+    };
+    fCc.addEventListener('change', syncPlaceholder);
+    syncPlaceholder();
+
+    var setError = function (input, msg) {
+      var box = document.getElementById(input.id + '-err');
+      if (msg) {
+        input.setAttribute('aria-invalid', 'true');
+        box.textContent = msg;
+        box.hidden = false;
+      } else {
+        input.removeAttribute('aria-invalid');
+        box.textContent = '';
+        box.hidden = true;
+      }
+      return !msg;
+    };
+
+    // people write 0981…, (0981)…, 0981-123456; keep the digits, and drop the
+    // trunk zero, which never belongs after a country code
+    var digitsOf = function (v) { return (v || '').replace(/\D+/g, '').replace(/^0+/, ''); };
+
+    // The example number for each country already carries that country's own
+    // grouping, so it doubles as a display mask: walk it, spending a digit per
+    // digit and copying the separators. Anything longer than the mask is
+    // appended, so an unusual number is shown in full rather than truncated.
+    var group = function (digits) {
+      var opt = fCc.options[fCc.selectedIndex];
+      var mask = (opt && opt.dataset.ph) || '';
+      var out = '', i = 0;
+      for (var m = 0; m < mask.length && i < digits.length; m++) {
+        if (/\d/.test(mask[m])) out += digits[i++];
+        else out += mask[m];
+      }
+      return (out + digits.slice(i)).trim();
+    };
+
+    [fName, fPhone].forEach(function (el) {
+      el.addEventListener('input', function () {
+        if (el.getAttribute('aria-invalid')) setError(el, null);
+      });
+    });
+
+    leadform.addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      var name = fName.value.trim();
+      var num  = digitsOf(fPhone.value);
+      var okName  = setError(fName, name.length >= 2 ? null : 'Escriba su nombre.');
+      // 6 is shorter than any mobile number in the list; 14 leaves room for the
+      // country code inside E.164's 15-digit ceiling
+      var okPhone = setError(fPhone,
+        !num.length ? 'Escriba su número de WhatsApp.'
+          : (num.length < 6 || num.length > 14) ? 'Ese número no parece completo.'
+          : null);
+
+      if (!okName || !okPhone) {
+        (!okName ? fName : fPhone).focus();
+        return;
+      }
+
+      var cc = fCc.value;
+      var opt = fCc.options[fCc.selectedIndex];
+      var display = '+' + cc + ' ' + group(num);
+      var e164 = cc + num;
+      var lead = {
+        name: name,
+        display: display,
+        e164: e164,
+        country: opt ? opt.dataset.iso : ''
+      };
+
+      // the confirmation page reads this instead of taking it from the URL, so a
+      // name and a phone number never land in history or a referrer header
+      try { sessionStorage.setItem('enerpy.lead', JSON.stringify(lead)); } catch (err) {}
+
+      record(lead);
+      window.location.href = 'gracias.html';
+    });
+  }
+
+  /* ---- registro en Google Sheets ---- */
+  /* Paste the Apps Script web-app URL into LEAD_ENDPOINT to start recording.
+     Empty is a working state, not a broken one: the form still validates and
+     still hands off to WhatsApp, it just writes nothing down. See
+     docs/google-sheets.md for the script and the deploy steps. */
+  var LEAD_ENDPOINT = '';
+
+  function record(lead) {
+    if (!LEAD_ENDPOINT) return;
+
+    var body = new FormData();
+    body.append('nombre', lead.name);
+    body.append('whatsapp', lead.e164);
+    body.append('mostrado', lead.display);
+    body.append('pais', lead.country);
+    body.append('origen', window.location.href);
+    body.append('enviado', new Date().toISOString());
+
+    /* This fires as the page is navigating away. A plain fetch() would be
+       cancelled on unload and the row would be lost, so sendBeacon is first: the
+       browser owns the request and finishes it after the document is gone.
+       keepalive on fetch is the same promise for browsers without sendBeacon.
+       Neither can read the response, which is fine — Apps Script does not send
+       CORS headers for a cross-origin POST anyway, so the answer was never
+       readable. A dropped row must not cost anyone their confirmation page. */
+    try {
+      if (navigator.sendBeacon && navigator.sendBeacon(LEAD_ENDPOINT, body)) return;
+      fetch(LEAD_ENDPOINT, { method: 'POST', body: body, mode: 'no-cors', keepalive: true })
+        .catch(function () {});
+    } catch (err) {}
+  }
+
   /* ---- scroll reveal ---- */
   var revealables = document.querySelectorAll('.reveal');
 

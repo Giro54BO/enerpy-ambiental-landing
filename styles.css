@@ -1107,3 +1107,202 @@ section[id]{scroll-margin-top:122px}
 @media (max-width:700px){
   .psteps{grid-template-columns:1fr;max-width:420px;margin-inline:auto}
 }
+
+/* ================= video de portada ================= */
+.filmstrip{position:relative;background:var(--ink);line-height:0}
+.filmstrip__v{
+  display:block;width:100%;
+  /* The hero below is min(94svh,900px); this sits a little shorter so the
+     headline underneath still signals itself on a laptop screen. cover, not
+     contain: a letterboxed band top and bottom would read as a broken embed. */
+  height:min(82svh,740px);
+  object-fit:cover;background:var(--ink);
+}
+@media (max-width:760px){
+  /* 16:9 across a phone is a 211px slot — too slight to open a page with. Taller
+     box, cropped sides; the subject of a landing-page film is always centred. */
+  .filmstrip__v{height:min(58svh,440px)}
+}
+.filmstrip__btn{
+  position:absolute;right:clamp(14px,2.5vw,24px);bottom:clamp(14px,2.5vw,24px);
+  width:44px;height:44px;padding:0;              /* 44px: comfortable touch target */
+  display:grid;place-items:center;
+  border:1px solid rgba(255,255,255,.34);border-radius:50%;
+  background:rgba(1,31,38,.62);color:var(--white);
+  backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
+  cursor:pointer;
+  transition:background-color .18s ease,border-color .18s ease,transform .18s ease;
+}
+.filmstrip__btn:hover{background:rgba(1,31,38,.85);transform:translateY(-1px)}
+.filmstrip__btn:focus-visible{outline:2px solid var(--lime);outline-offset:3px}
+.filmstrip__ico{width:19px;height:19px;display:block}
+
+/* ================= franja de captación ================= */
+/* Lime: this is the page's conversion unit and the brand already spends lime on
+   action. It also breaks video from hero, which would otherwise be two dark
+   full-bleed blocks stacked with nothing between them. */
+.leadstrip{background:var(--lime);padding-block:clamp(26px,3.4vw,40px)}
+.leadstrip__in{
+  display:grid;grid-template-columns:minmax(0,.78fr) minmax(0,2.1fr);
+  gap:clamp(18px,3vw,44px);align-items:center;
+}
+.leadstrip__h{
+  margin:0;font:var(--type-h2-sm);letter-spacing:var(--type-h2-sm-ls);
+  color:var(--softwood);font-size:clamp(1.35rem,2.4vw,1.9rem);
+}
+.leadstrip__p{
+  margin:8px 0 0;font:var(--type-sm);letter-spacing:var(--type-sm-ls);
+  color:rgba(1,53,64,.82);max-width:46ch;
+}
+
+.leadform{
+  display:grid;
+  /* Real minimums, not minmax(0,…): with a floor of 0 the auto-sized button
+     took 242px of a 621px row and squeezed the number field down to 76px — a
+     46px box holding 84px of placeholder. The track can no longer collapse
+     below what the field has to show, and the media queries below take over
+     before the row runs out of room. */
+  grid-template-columns:minmax(150px,1fr) minmax(240px,1.2fr) auto;
+  gap:14px;align-items:end;
+}
+.lf__field{display:flex;flex-direction:column;gap:6px;min-width:0}
+.lf__label{
+  font:var(--type-label-sm);letter-spacing:var(--type-label-sm-ls);
+  text-transform:uppercase;color:rgba(1,53,64,.78);
+}
+.lf__input{
+  width:100%;min-width:0;
+  font:var(--type-body);letter-spacing:var(--type-body-ls);
+  color:var(--softwood);background:var(--white);
+  /* .58: white on lime is 1.3:1, so the fill cannot mark where the field
+     starts — the border is doing that alone and owes 1.4.11 its 3:1.
+     At .26 it measured 1.63:1; at .58 it measures 3.2:1. */
+  border:1.5px solid rgba(1,53,64,.58);border-radius:12px;
+  padding:13px 15px;
+  transition:border-color .18s ease,box-shadow .18s ease;
+}
+/* .68, not the .5 this started at: a placeholder is text and owes the same
+   4.5:1 as any other. Softwood at .5 over white measures 2.98:1; .68
+   measures 4.96:1 and still reads as a hint rather than as an answer. */
+.lf__input::placeholder{color:rgba(1,53,64,.68)}
+.lf__input:focus{outline:none;border-color:var(--softwood);box-shadow:0 0 0 3px rgba(1,53,64,.18)}
+.lf__input[aria-invalid="true"]{border-color:#8E2A1B;box-shadow:0 0 0 3px rgba(142,42,27,.16)}
+
+/* country code + number read as one control, so they share one rounded box */
+.lf__phone{display:flex;align-items:stretch;gap:0;min-width:0}
+.lf__ccwrap{position:relative;flex:none;display:flex}
+.lf__cc{
+  appearance:none;
+  font:var(--type-body);letter-spacing:var(--type-body-ls);
+  color:var(--softwood);background:var(--white);
+  border:1.5px solid rgba(1,53,64,.58);border-right:0;
+  border-radius:12px 0 0 12px;
+  padding:13px 30px 13px 14px;
+  /* wide enough that the dial code is never the part that gets
+     ellipsised — the country name may be, the +595 may not */
+  max-width:138px;cursor:pointer;
+  text-overflow:ellipsis;
+}
+.lf__cc:focus{outline:none;border-color:var(--softwood);box-shadow:0 0 0 3px rgba(1,53,64,.18)}
+.lf__chev{
+  position:absolute;right:11px;top:50%;transform:translateY(-50%);
+  width:11px;height:8px;color:rgba(1,53,64,.6);pointer-events:none;
+}
+.lf__input--tel{border-radius:0 12px 12px 0;flex:1 1 auto;min-width:0}
+
+.lf__send{align-self:end;height:49px;padding-inline:22px}
+/* .btn--primary is lime on lime here, so the roles swap: dark pill, lime mark */
+.btn--onlime{--btn-bg:var(--softwood);--btn-fg:var(--lime);--btn-bd:transparent}
+/* This button carries .btn--primary too, and .btn--primary:hover sets `background`
+   as a literal, not through --btn-bg — so it won the cascade and repainted the
+   pill light lime on a lime band, which is where "the hover is illegible" came
+   from. Overriding `background` here, at .btn--primary.btn--onlime (0-3-0), ends
+   that regardless of source order. Hover is simply a darker pour of the resting
+   colour: softwood #013540 -> #001A20, lime text going 10.2:1 -> 13.9:1. */
+.btn--primary.btn--onlime:hover,
+.btn--primary.btn--onlime:focus-visible{background:#001A20;--btn-bg:#001A20}
+
+/* The shared :focus-visible ring is lime, which is this band's own background —
+   it would be an invisible focus indicator on every control in the strip. */
+.leadstrip :focus-visible{outline-color:var(--softwood)}
+
+.lf__err{
+  margin:0;font:var(--type-2xs);letter-spacing:var(--type-2xs-ls);
+  color:#7A2317;                                  /* 6.0:1 on lime */
+}
+.lf__note{
+  grid-column:1/-1;margin:2px 0 0;
+  font:var(--type-2xs);letter-spacing:var(--type-2xs-ls);
+  color:rgba(1,53,64,.72);
+}
+
+/* ================= página de confirmación ================= */
+.thanks-body{
+  min-height:100svh;
+  display:grid;place-items:center;
+  background:var(--ink);
+  padding:clamp(24px,5vw,56px) var(--gut);
+}
+.thanks{width:100%;max-width:560px}
+.thanks__card{
+  background:var(--softwood);
+  border:1px solid var(--line-dark);
+  border-radius:var(--r-lg);
+  padding:clamp(28px,5vw,48px);
+  text-align:center;
+}
+.thanks__brand{display:inline-block;line-height:0;margin-bottom:clamp(22px,4vw,32px)}
+/* the supplied mark is drawn for light grounds, so it keeps its own white chip */
+.thanks__brand img{
+  width:clamp(128px,30vw,160px);height:auto;display:block;
+  background:var(--white);border-radius:999px;padding:10px 16px;
+}
+.thanks__mark{
+  width:62px;height:62px;border-radius:50%;
+  display:grid;place-items:center;margin:0 auto clamp(18px,3vw,24px);
+  background:var(--lime);color:var(--softwood);
+}
+.thanks__mark svg{width:30px;height:30px;display:block}
+.thanks__h{
+  margin:0;font:var(--type-h2-sm);letter-spacing:var(--type-h2-sm-ls);
+  color:var(--white);font-size:clamp(1.6rem,4.6vw,2.3rem);
+  text-wrap:balance;
+}
+.thanks__p{
+  margin:14px auto 0;max-width:42ch;
+  font:var(--type-body);letter-spacing:var(--type-body-ls);
+  color:var(--iron);
+}
+.thanks__actions{
+  display:flex;flex-wrap:wrap;justify-content:center;gap:12px;
+  margin-top:clamp(26px,4vw,34px);
+}
+/* a quiet second action: the reader has already converted, and two lime pills
+   side by side would make them choose between identical weights */
+.btn--ghostdark{--btn-bg:transparent;--btn-fg:var(--iron);--btn-bd:var(--line-dark)}
+.btn--ghostdark:hover{--btn-fg:var(--white);--btn-bd:var(--iron)}
+.thanks__note{
+  margin:20px 0 0;
+  font:var(--type-2xs);letter-spacing:var(--type-2xs-ls);
+  color:var(--muted);
+}
+.thanks__note a{color:var(--lime)}
+@media (max-width:420px){
+  .thanks__actions .btn{width:100%}
+}
+
+@media (max-width:980px){
+  .leadstrip__in{grid-template-columns:1fr;gap:18px}
+  .leadform{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:12px}
+  .lf__send{grid-column:1/-1;width:100%}
+}
+@media (max-width:560px){
+  .leadform{grid-template-columns:minmax(0,1fr)}
+  .lf__cc{max-width:130px}
+}
+
+@media (prefers-reduced-motion:reduce){
+  /* a hover that is only a 2px lift leaves nothing to perceive once motion is
+     off; the colour and ring changes above are what carry it there */
+  .btn:hover,.filmstrip__btn:hover{transform:none}
+}

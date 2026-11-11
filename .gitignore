@@ -12,3 +12,7 @@ Assets/
 
 # Agent/design context, not part of the site (same rule as Context/ above)
 PRODUCT.md
+
+# Collect Files output — a rebuildable bundle, not source
+Enerpy-packaged/
+Enerpy-packaged.zip

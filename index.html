@@ -30,7 +30,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
 <script>document.documentElement.classList.add('js')</script>
-<link rel="stylesheet" href="styles.css?v=68">
+<link rel="stylesheet" href="styles.css?v=79">
 </head>
 <body>
 
@@ -73,6 +73,18 @@
     <circle cx="10" cy="5.5" r="1.75" fill="#FFFFFF" stroke="#1E7B3C" stroke-width="0.45"/>
     <polygon points="10.000,4.650 10.212,5.209 10.808,5.237 10.342,5.611 10.500,6.188 10.000,5.860 9.500,6.188 9.658,5.611 9.192,5.237 9.788,5.209" fill="#F9D616"/>
   </symbol>
+  <symbol id="ico-pause" viewBox="0 0 24 24">
+    <path fill="currentColor" d="M8 5h3v14H8zm5 0h3v14h-3z"/>
+  </symbol>
+  <symbol id="ico-play" viewBox="0 0 24 24">
+    <path fill="currentColor" d="M8 5.2v13.6a.6.6 0 0 0 .92.5l10.6-6.8a.6.6 0 0 0 0-1l-10.6-6.8a.6.6 0 0 0-.92.5z"/>
+  </symbol>
+  <symbol id="ico-send" viewBox="0 0 24 24">
+    <path fill="currentColor" d="M3.4 20.4 21.85 12.92c.86-.35.86-1.49 0-1.84L3.4 3.6a.99.99 0 0 0-1.38.92L2 9.12c0 .5.37.93.87.99L17 12 2.87 13.89c-.5.07-.87.5-.87 1l.02 4.59c0 .71.73 1.2 1.38.92z"/>
+  </symbol>
+  <symbol id="ico-check" viewBox="0 0 24 24">
+    <path fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.6 4.8 4.8L19.5 7.2"/>
+  </symbol>
 </svg>
 
 <a class="skip" href="#main">Saltar al contenido principal</a>
@@ -103,6 +115,85 @@
 </header>
 
 <main id="main">
+
+<!-- ============ 0. VIDEO DE PORTADA ============ -->
+<!-- muted + playsinline are what actually let this autoplay: every browser
+     blocks sound-on autoplay, and iOS blocks anything that is not inline.
+     The file carries no audio track at all, so there is nothing to unmute and
+     no need for a volume control — only a pause, which WCAG 2.2.2 requires of
+     motion that starts by itself and runs past five seconds. -->
+<section class="filmstrip" aria-label="Video de presentación de Enerpy Ambiental">
+  <video class="filmstrip__v" id="herovideo"
+         poster="img/Video/hero-poster.webp"
+         width="1920" height="1080"
+         autoplay muted loop playsinline preload="metadata">
+    <source src="img/Video/hero.mp4" type="video/mp4">
+  </video>
+  <button class="filmstrip__btn" id="videotoggle" type="button" aria-label="Pausar video">
+    <svg class="filmstrip__ico" aria-hidden="true" focusable="false"><use href="#ico-pause"></use></svg>
+  </button>
+</section>
+
+<!-- ============ 0b. CAPTACIÓN ============ -->
+<!-- No backend: this is a static site. The form validates, then hands the
+     conversation to WhatsApp with the message already written — the same
+     destination every other CTA on the page uses. Nothing is stored here, and
+     the note under the fields says so rather than implying a database. -->
+<section class="leadstrip" aria-labelledby="leadstrip-h">
+  <div class="wrap leadstrip__in">
+
+    <div class="leadstrip__copy">
+      <h2 class="leadstrip__h" id="leadstrip-h">Hablemos de sus residuos.</h2>
+      <p class="leadstrip__p">Déjenos su nombre y su WhatsApp. Un especialista le responde con el siguiente paso.</p>
+    </div>
+
+    <form class="leadform" id="leadform" novalidate>
+      <div class="lf__field">
+        <label class="lf__label" for="lf-name">Nombre</label>
+        <input class="lf__input" id="lf-name" name="nombre" type="text"
+               autocomplete="name" placeholder="Nombre y apellido"
+               aria-describedby="lf-name-err" required>
+        <p class="lf__err" id="lf-name-err" hidden></p>
+      </div>
+
+      <div class="lf__field">
+        <label class="lf__label" for="lf-phone">WhatsApp</label>
+        <div class="lf__phone">
+          <span class="lf__ccwrap">
+            <select class="lf__cc" id="lf-cc" aria-label="Código de país">
+            <option value="595" data-iso="PY" data-ph="981 123456" selected>🇵🇾 +595 Paraguay</option>
+            <option value="54" data-iso="AR" data-ph="11 2345 6789">🇦🇷 +54 Argentina</option>
+            <option value="591" data-iso="BO" data-ph="7123 4567">🇧🇴 +591 Bolivia</option>
+            <option value="55" data-iso="BR" data-ph="11 91234 5678">🇧🇷 +55 Brasil</option>
+            <option value="56" data-iso="CL" data-ph="9 1234 5678">🇨🇱 +56 Chile</option>
+            <option value="57" data-iso="CO" data-ph="301 2345678">🇨🇴 +57 Colombia</option>
+            <option value="593" data-iso="EC" data-ph="99 123 4567">🇪🇨 +593 Ecuador</option>
+            <option value="34" data-iso="ES" data-ph="612 345 678">🇪🇸 +34 España</option>
+            <option value="52" data-iso="MX" data-ph="55 1234 5678">🇲🇽 +52 México</option>
+            <option value="51" data-iso="PE" data-ph="912 345 678">🇵🇪 +51 Perú</option>
+            <option value="1" data-iso="US" data-ph="555 123 4567">🇺🇸 +1 Estados Unidos</option>
+            <option value="598" data-iso="UY" data-ph="94 123 456">🇺🇾 +598 Uruguay</option>
+            </select>
+            <svg class="lf__chev" aria-hidden="true" focusable="false" viewBox="0 0 12 8"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="m1 1.8 5 4.4 5-4.4"/></svg>
+          </span>
+          <input class="lf__input lf__input--tel" id="lf-phone" name="whatsapp" type="tel"
+                 inputmode="tel" autocomplete="tel-national" placeholder="981 123456"
+                 aria-describedby="lf-phone-err" required>
+        </div>
+        <p class="lf__err" id="lf-phone-err" hidden></p>
+      </div>
+
+      <button class="btn btn--primary btn--onlime lf__send" type="submit">
+        <svg class="btn__ico" aria-hidden="true" focusable="false"><use href="#ico-send"></use></svg>
+        <span>Enviar información</span>
+      </button>
+
+      <p class="lf__note">Usamos su nombre y su número solo para responderle por WhatsApp.</p>
+    </form>
+
+
+  </div>
+</section>
 
 <!-- ============ 1. HERO ============ -->
 <section class="hero" id="inicio">
@@ -895,6 +986,6 @@
 }
 </script>
 
-<script src="main.js?v=68" defer></script>
+<script src="main.js?v=79" defer></script>
 </body>
 </html>
